@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 
@@ -10,6 +11,7 @@ class GetStartScreen extends StatelessWidget {
     var bodyMargin = size.width * 0.1;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       backgroundColor: SolidColors.getStartScreenBackground,
@@ -31,7 +33,26 @@ class GetStartScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: bodyMargin),
               child: Text('Food for \nEveryone',style: Theme.of(context).textTheme.headline1,),
-            )
+            ),
+            const SizedBox(height: 48,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Image(image: AssetImage('assets/images/ToyFaces_girl.png')),
+                Image(image: AssetImage('assets/images/ToyFaces_man.png')),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+              child: SizedBox(
+                width: double.infinity,
+                height: 64,
+                  child: ElevatedButton(onPressed: (){}, child: Text('Get started',
+                    style: Theme.of(context).textTheme.bodyText2 ,))
+              ),
+            ),
+            const SizedBox(height: 16,),
+
         ],
       )
     );

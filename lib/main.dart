@@ -23,7 +23,19 @@ class MyApp extends StatelessWidget {
             fontSize: 64,
             fontWeight: FontWeight.bold,
             color: Colors.white
-          )
+          ),
+          bodyText2: TextStyle(
+            fontFamily: 'SF',
+            fontSize: 14,
+            color: SolidColors.buttonTextColorRed
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.white,
+            onPrimary: SolidColors.buttonTextColorRed,
+            shape: const StadiumBorder(),
+          ),
         ),
         primarySwatch: Colors.red,
       ),
