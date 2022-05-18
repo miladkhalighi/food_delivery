@@ -7,6 +7,7 @@ class SolidColors{
  static const primaryColor = Color(0xFFFA4A0C);
  static const buttonTextColorRed = Color(0xFFFF460A);
  static const buttonTextColorWhite = Color(0xFFFFFFFF);
+ static const backgroundScreens = Color(0xFFF2F2F2);
 }
 
 class GradiantColors{

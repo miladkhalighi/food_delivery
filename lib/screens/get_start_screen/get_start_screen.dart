@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/screens/home_screen/home_screen.dart';
 
 class GetStartScreen extends StatelessWidget {
   const GetStartScreen({Key? key}) : super(key: key);
@@ -104,7 +105,11 @@ class GetStartScreen extends StatelessWidget {
                     child:SizedBox(
                         width: double.infinity,
                         height: 64,
-                        child: ElevatedButton(onPressed: (){}, child: Text('Get started',
+                        child: ElevatedButton(onPressed: (){
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
+                            return HomeScreen();
+                          }));
+                        }, child: Text('Get started',
                           style: Theme.of(context).textTheme.bodyText2 ,))
                     ), )
                 ],

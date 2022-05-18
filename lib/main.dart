@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/screens/get_start_screen.dart';
+import 'package:food_delivery/screens/get_start_screen/get_start_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +16,10 @@ class MyApp extends StatelessWidget {
       title: 'Food Delivery',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0
+        ),
         fontFamily: "SF",
         textTheme: const TextTheme(
           headline1: TextStyle(
