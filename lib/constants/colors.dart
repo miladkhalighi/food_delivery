@@ -10,5 +10,12 @@ class SolidColors{
 }
 
 class GradiantColors{
-
+ static final getStartPageGradientLeft = [
+  SolidColors.getStartScreenBackground,
+  SolidColors.getStartScreenBackground.withOpacity(0.1),
+ ];
+ static final getStartPageGradientRight = [
+  SolidColors.getStartScreenBackground,
+  SolidColors.getStartScreenBackground.withOpacity(0.5),
+ ];
 }

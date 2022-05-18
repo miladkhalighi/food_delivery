@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
@@ -9,6 +11,7 @@ class GetStartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.1;
+    var avatorHeights = size.height/2;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -35,13 +38,59 @@ class GetStartScreen extends StatelessWidget {
               child: Text('Food for \nEveryone',style: Theme.of(context).textTheme.headline1,),
             ),
             const SizedBox(height: 48,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Image(image: AssetImage('assets/images/ToyFaces_girl.png')),
-                Image(image: AssetImage('assets/images/ToyFaces_man.png')),
-              ],
+            SizedBox(
+              width: double.infinity,
+              height: avatorHeights,
+              child: Stack(
+                children:  [
+                  const Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Image(image: AssetImage('assets/images/ToyFaces_man.png'),
+                        //fit: BoxFit.cover,
+                      )
+                  ),
+                  const Positioned(
+                    left: 0,
+                    bottom: 0,
+                     top: 0,
+                      child: Image(image: AssetImage('assets/images/ToyFaces_girl.png',),
+                        //fit: BoxFit.cover,
+
+                      )
+                  ),
+                  Positioned(
+                    bottom: 0,
+                      left: 0,
+                      top: avatorHeights /2,
+                      child: Container(
+                        width: size.width/2,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin:Alignment.bottomCenter,
+                              end:Alignment.topCenter,
+                              colors: GradiantColors.getStartPageGradientLeft)
+                        ),
+                      )
+                  ),
+                  Positioned(
+                    bottom: 0,
+                      right: 0,
+                      top: avatorHeights /1.29,
+                      child: Container(
+                        width: size.width/2,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin:Alignment.bottomCenter,
+                              end:Alignment.topCenter,
+                              colors: GradiantColors.getStartPageGradientRight)
+                        ),
+                      )
+                  ),
+                ],
+              ),
             ),
+            const Spacer(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: bodyMargin),
               child: SizedBox(
