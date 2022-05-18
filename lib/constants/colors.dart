@@ -8,6 +8,7 @@ class SolidColors{
  static const buttonTextColorRed = Color(0xFFFF460A);
  static const buttonTextColorWhite = Color(0xFFFFFFFF);
  static const backgroundScreens = Color(0xFFF2F2F2);
+ static const textFieldInside = Color(0xFFEFEEEE);
 }
 
 class GradiantColors{
