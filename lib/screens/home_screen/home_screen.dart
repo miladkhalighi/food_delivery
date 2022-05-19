@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/models/category.dart';
+
+import '../get_start_screen/components/category_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
   String searchTxt = "";
+  int categoryItemIndex = 0;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -35,7 +39,30 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 32,),
           searchBar(bodyMargin),
           const SizedBox(height: 32,),
-          
+          Padding(
+            padding: EdgeInsets.only(left: bodyMargin),
+            child: Container(
+              color: Colors.yellow,
+              height: 100,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: categoryList.length,
+                itemBuilder: (context,index){
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CategoryItem(name: categoryList[index].name, pressed: (){
+                        setState(() {
+                          categoryItemIndex = index;
+                        });
+                    },
+                     enabled: index == categoryItemIndex ? true : false,
+                    ),
+                  );
+              }),
+            ),
+          )
 
         ],
       ),
@@ -90,28 +117,5 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class CategoryItem extends StatelessWidget {
 
-  final String name;
-  final Function() pressed;
-  final bool enabled;
-
-  const CategoryItem({
-    Key? key,
-    required this.name,
-    required this.pressed,
-    required this.enabled
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(name,style: Theme.of(context).textTheme.bodyText1,),
-        const SizedBox(height: 8,),
-        Divider(color: enabled ? SolidColors.primaryColor : Colors.transparent,)
-      ],
-    );
-  }
-}
 
