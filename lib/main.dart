@@ -30,14 +30,15 @@ class MyApp extends StatelessWidget {
           ),
           headline2: TextStyle(
             fontFamily: 'SF',
-            fontSize: 54,
+            fontSize: 48,
             fontWeight: FontWeight.bold,
             color: Colors.black
           ),
           bodyText1: TextStyle(
             fontFamily: 'SF',
             fontSize: 17,
-            color: Colors.black
+            color: Colors.black,
+            fontWeight: FontWeight.bold
           ),
           bodyText2: TextStyle(
             fontFamily: 'SF',
