@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/colors.dart';
 
@@ -66,7 +67,7 @@ class FoodItem extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         image: AssetImage(img),
-                        fit: BoxFit.contain
+                        fit: BoxFit.cover
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -76,7 +77,6 @@ class FoodItem extends StatelessWidget {
                       )
                     ]
                 ),
-
               )
           )
         ],
