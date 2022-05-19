@@ -10,12 +10,6 @@ class Category{
    Category(name: 'Drinks'),
    Category(name: 'Snacks'),
    Category(name: 'Sauce'),
-
-   Category(name: 'Foods'),
-   Category(name: 'Drinks'),
-   Category(name: 'Snacks'),
-   Category(name: 'Sauce'),
-
-   //TODO : remove half of the list
+   
 
  ];

@@ -26,72 +26,83 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.1;
-    return Scaffold(
-      backgroundColor: SolidColors.backgroundScreens,
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildAppBar(bodyMargin),
-            const SizedBox(height: 32,),
-            //header text
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: bodyMargin),
-              child: Text('Delicious \nfood for you',style: Theme.of(context).textTheme.headline2,),
-            ),
-            const SizedBox(height: 32,),
-            searchBar(bodyMargin),
-            const SizedBox(height: 32,),
-            Padding(
-              padding: EdgeInsets.only(left: bodyMargin),
-              child: SizedBox(
-                height: size.height * 0.07,
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemCount: categoryList.length,
-                  itemBuilder: (context,index){
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CategoryItem(name: categoryList[index].name, pressed: (){
-                          setState(() {
-                            categoryItemIndex = index;
-                          });
-                      },
-                       enabled: index == categoryItemIndex ? true : false,
-                      ),
-                    );
-                }),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: SolidColors.backgroundScreens,
+        appBar: AppBar(
+          title: buildAppBar(bodyMargin),
+        ),
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //buildAppBar(bodyMargin),
+              const SizedBox(height: 32,),
+              //header text
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+                child: Text('Delicious \nfood for you',style: Theme.of(context).textTheme.headline2,),
               ),
-            ),
-            const SizedBox(height: 32,),
-            Padding(
-              padding: EdgeInsets.only(left: bodyMargin),
-              child: SizedBox(
-                width: double.infinity,
-                height: size.height/2.2,
-                child: ListView.builder(
+              const SizedBox(height: 32,),
+              searchBar(bodyMargin),
+              const SizedBox(height: 32,),
+              Padding(
+                padding: EdgeInsets.only(left: bodyMargin),
+                child: SizedBox(
+                  height: size.height * 0.07,
+                  child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: itemsList.length,
-                    itemBuilder: (context,index)=>Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-                      child: FoodItem(
-                      width: size.width/2.5,
-                        name: itemsList[index].name,
-                        price: itemsList[index].price,
-                        img: itemsList[index].img,
+                    shrinkWrap: true,
+                    itemCount: categoryList.length,
+                    itemBuilder: (context,index){
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CategoryItem(name: categoryList[index].name, pressed: (){
+                            setState(() {
+                              categoryItemIndex = index;
+                            });
+                        },
+                         enabled: index == categoryItemIndex ? true : false,
+                        ),
+                      );
+                  }),
                 ),
-                    )
-                ),
-              )
-            ),
-            const SizedBox(height: 32,),
+              ),
+              const SizedBox(height: 8,),
+              Padding(
+                padding: EdgeInsets.only(right: bodyMargin),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                    child: TextButton(onPressed: (){}, child: Text('see more',style: Theme.of(context).textTheme.bodyText2,))),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: bodyMargin),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: size.height/2.2,
+                  child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: itemsList.length,
+                      itemBuilder: (context,index)=>Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+                        child: FoodItem(
+                        width: size.width/2.5,
+                          name: itemsList[index].name,
+                          price: itemsList[index].price,
+                          img: itemsList[index].img,
+                  ),
+                      )
+                  ),
+                )
+              ),
+              const SizedBox(height: 32,),
 
-          ],
+            ],
+          ),
         ),
       ),
     );
