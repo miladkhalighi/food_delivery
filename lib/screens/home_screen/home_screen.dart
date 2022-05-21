@@ -1,25 +1,27 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/models/category.dart';
 import 'package:food_delivery/models/item.dart';
 
+import 'components/bottom_nav_bar.dart';
 import 'components/category_item.dart';
 import 'components/food_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
   String searchTxt = "";
-  int categoryItemIndex = 0;
+  var _categoryItemIndex = 0;
+  var _bottomNavItemIndex = 0;
+
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -32,6 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: buildAppBar(bodyMargin),
         ),
+        bottomNavigationBar: BottomNavBar(
+          selectedItemIndex: _bottomNavItemIndex,
+          onTap: (value ) {
+          setState(() {
+            _bottomNavItemIndex = value;
+          });
+        },),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
@@ -61,10 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: CategoryItem(name: categoryList[index].name, pressed: (){
                             setState(() {
-                              categoryItemIndex = index;
+                              _categoryItemIndex = index;
                             });
                         },
-                         enabled: index == categoryItemIndex ? true : false,
+                         enabled: index == _categoryItemIndex ? true : false,
                         ),
                       );
                   }),
@@ -108,19 +117,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+
   Padding buildAppBar(double bodyMargin) {
     return Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMargin),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                  onTap: (){},
-                  child: SvgPicture.asset('assets/icons/menu_icon.svg',width: 24,height: 24,)
+              IconButton(
+                  onPressed: () {  },
+                  icon: SvgPicture.asset('assets/icons/menu_icon.svg',width: 24,height: 24,),
               ),
-              InkWell(
-                  onTap: (){},
-                  child: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,)
+              IconButton(
+                onPressed: () {  },
+                icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,),
               ),
             ],
           ),
@@ -155,6 +165,9 @@ class _HomeScreenState extends State<HomeScreen> {
         );
   }
 }
+
+
+
 
 
 
