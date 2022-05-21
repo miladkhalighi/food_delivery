@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/screens/get_start_screen/get_start_screen.dart';
+import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
 
 void main() {
 
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.red,
       ),
-      home: const GetStartScreen(),
+      home: const ProfileScreen(),
     );
   }
 }
