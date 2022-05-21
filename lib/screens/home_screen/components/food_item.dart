@@ -65,22 +65,25 @@ class FoodItem extends StatelessWidget {
                 top: 0,
                 left: 0,
                 right: 0,
-                child: Container(
-                  width: width - width * 0.2,
-                  height: width - width * 0.2,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: AssetImage(img),
-                          fit: BoxFit.cover
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 32,
-                            offset: const Offset(0, 16)
-                        )
-                      ]
+                child: Hero(
+                  tag: name,
+                  child: Container(
+                    width: width - width * 0.2,
+                    height: width - width * 0.2,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage(img),
+                            fit: BoxFit.cover
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              blurRadius: 32,
+                              offset: const Offset(0, 16)
+                          )
+                        ]
+                    ),
                   ),
                 )
             )
