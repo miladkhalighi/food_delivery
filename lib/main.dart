@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/screens/get_start_screen/get_start_screen.dart';
 
 void main() {
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent,
-          elevation: 0
+          elevation: 0,
+          backgroundColor: SolidColors.backgroundScreens,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: SolidColors.statusBarColor,
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarColor: SolidColors.systemNavBarColor,
+            systemNavigationBarIconBrightness: Brightness.dark
+          )
         ),
         fontFamily: "SF",
         textTheme: const TextTheme(

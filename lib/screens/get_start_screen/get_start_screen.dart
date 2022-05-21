@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/screens/home_screen/home_screen.dart';
 
@@ -14,6 +15,7 @@ class GetStartScreen extends StatelessWidget {
     var bodyMargin = size.width * 0.1;
     var avatorHeights = size.height/2;
     return Scaffold(
+
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -32,7 +34,7 @@ class GetStartScreen extends StatelessWidget {
                   ),
                   height: 64,
                   width: 64,
-                  child: const Image(image: AssetImage('assets/images/chef.png'))),
+                  child: SvgPicture.asset('assets/icons/chef.svg')),
             ),
             const SizedBox(height: 16,),
             //header text

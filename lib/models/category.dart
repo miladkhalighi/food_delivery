@@ -10,6 +10,6 @@ class Category{
    Category(name: 'Drinks'),
    Category(name: 'Snacks'),
    Category(name: 'Sauce'),
-   
+
 
  ];

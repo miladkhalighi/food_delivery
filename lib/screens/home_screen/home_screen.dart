@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var bodyMargin = size.width * 0.1;
+    var bodyMargin = size.width * 0.07;
     return SafeArea(
       child: Scaffold(
         backgroundColor: SolidColors.backgroundScreens,

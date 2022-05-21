@@ -9,6 +9,8 @@ class SolidColors{
  static const buttonTextColorWhite = Color(0xFFFFFFFF);
  static const backgroundScreens = Color(0xFFF2F2F2);
  static const textFieldInside = Color(0xFFEFEEEE);
+ static const statusBarColor = Color(0xFFF2F2F2);
+ static const systemNavBarColor = Color(0xFFF2F2F2);
 }
 
 class GradiantColors{
