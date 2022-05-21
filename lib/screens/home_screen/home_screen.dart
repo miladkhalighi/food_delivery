@@ -7,6 +7,7 @@ import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/models/category.dart';
 import 'package:food_delivery/models/item.dart';
 
+import '../item_details/ItemDetails.dart';
 import 'components/bottom_nav_bar.dart';
 import 'components/category_item.dart';
 import 'components/food_item.dart';
@@ -103,6 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           name: itemsList[index].name,
                           price: itemsList[index].price,
                           img: itemsList[index].img,
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ItemDetailsScreen(item: itemsList[index])));
+                          },
                   ),
                       )
                   ),
