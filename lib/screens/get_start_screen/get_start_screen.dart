@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/screens/home_screen/home_screen.dart';
+import 'package:food_delivery/screens/root_screen/RootScreen.dart';
 
 class GetStartScreen extends StatelessWidget {
   const GetStartScreen({Key? key}) : super(key: key);
@@ -115,7 +116,7 @@ class GetStartScreen extends StatelessWidget {
                         height: 64,
                         child: ElevatedButton(onPressed: (){
                           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
-                            return HomeScreen();
+                            return const RootScreen();
                           }));
                         }, child: Text('Get started',
                           style: Theme.of(context).textTheme.bodyText2 ,),
