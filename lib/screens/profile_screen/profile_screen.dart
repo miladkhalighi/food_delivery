@@ -18,60 +18,52 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: bodyMargin),
-        child: Stack(
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
           children: [
-            ListView(
-              physics: const BouncingScrollPhysics(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Text(
-                      'My profile',
-                      style: textTheme.headline2,
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    TitleWithTextButton(
-                      buttonText: 'change',
-                      title: 'Personal details',
-                      onPressed: () {},
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    SizedBox(
-                      height: 200, //todo : change dynamic size
-                      child: buildProfileCard(textTheme),
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    ProfileListTile(title: 'Orders', onTap: () {  },),
-                    const SizedBox(height: 32,),
-                    ProfileListTile(title: 'Pending reviews', onTap: () {  },),
-                    const SizedBox(height: 32,),
-                    ProfileListTile(title: 'Faq', onTap: () {  },),
-                    const SizedBox(height: 32,),
-                    ProfileListTile(title: 'Help', onTap: () {  },),
-
-
-                  ],
+                const SizedBox(
+                  height: 32,
                 ),
-                const SizedBox(height: 64,),
+                Text(
+                  'My profile',
+                  style: textTheme.headline2,
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                TitleWithTextButton(
+                  buttonText: 'change',
+                  title: 'Personal details',
+                  onPressed: () {},
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                SizedBox(
+                  height: 200, //todo : change dynamic size
+                  child: buildProfileCard(textTheme),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                ProfileListTile(title: 'Orders', onTap: () {  },),
+                const SizedBox(height: 32,),
+                ProfileListTile(title: 'Pending reviews', onTap: () {  },),
+                const SizedBox(height: 32,),
+                ProfileListTile(title: 'Faq', onTap: () {  },),
+                const SizedBox(height: 32,),
+                ProfileListTile(title: 'Help', onTap: () {  },),
+
+
               ],
             ),
-            Positioned(
-              bottom: 16,
-              left: 0,
-              right: 0,
-                child: SizedBox(
-                  height: 64,
-                    child: ElevatedButton(onPressed: (){}, child: const Text('Update'))))
+            const SizedBox(height: 64,),
+            SizedBox(
+                height: 64,
+                child: ElevatedButton(onPressed: (){}, child: const Text('Update')))
           ],
         ),
       ),
