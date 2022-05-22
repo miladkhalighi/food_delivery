@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Food Delivery',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: SolidColors.backgroundScreens,
         appBarTheme: const AppBarTheme(
           elevation: 0,
           backgroundColor: SolidColors.backgroundScreens,
@@ -56,8 +57,8 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: Colors.white,
-            onPrimary: SolidColors.buttonTextColorRed,
+            primary: SolidColors.primaryColor,
+            onPrimary: SolidColors.buttonTextColorWhite,
             shape: const StadiumBorder(),
           ),
         ),
