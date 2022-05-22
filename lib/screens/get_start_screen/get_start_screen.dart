@@ -118,7 +118,12 @@ class GetStartScreen extends StatelessWidget {
                             return HomeScreen();
                           }));
                         }, child: Text('Get started',
-                          style: Theme.of(context).textTheme.bodyText2 ,))
+                          style: Theme.of(context).textTheme.bodyText2 ,),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            onPrimary: SolidColors.buttonTextColorRed
+                          ),
+                        )
                     ), )
                 ],
               ),
