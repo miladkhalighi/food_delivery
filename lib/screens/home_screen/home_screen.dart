@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
               ),
             ),
-            const SizedBox(height: 8,),
+            //const SizedBox(height: 8,),
             Padding(
               padding: EdgeInsets.only(right: bodyMargin),
               child: Align(
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(left: bodyMargin),
               child: SizedBox(
                 width: double.infinity,
-                height: size.height/2.2,
+                height: size.height/2.5,
                 child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
@@ -99,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               )
             ),
-            const SizedBox(height: 32,),
 
           ],
         ),

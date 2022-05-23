@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_delivery/screens/item_details/ItemDetails.dart';
 
 import '../../../constants/colors.dart';
 
@@ -28,7 +26,7 @@ class FoodItem extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              bottom: 0,
+              top : width /4,
               left: 0,
               right: 0,
               child: Container(

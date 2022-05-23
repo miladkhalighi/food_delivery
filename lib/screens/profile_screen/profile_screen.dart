@@ -24,9 +24,6 @@ class ProfileScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 32,
-                ),
                 Text(
                   'My profile',
                   style: textTheme.headline2,
@@ -63,7 +60,8 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 64,),
             SizedBox(
                 height: 64,
-                child: ElevatedButton(onPressed: (){}, child: const Text('Update')))
+                child: ElevatedButton(onPressed: (){}, child: const Text('Update'))),
+            const SizedBox(height: 16,),
           ],
         ),
       ),
