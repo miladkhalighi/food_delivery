@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/colors.dart';
@@ -22,6 +23,19 @@ class HomeScreen extends StatefulWidget {
 
   String searchTxt = "";
   var _categoryItemIndex = 0;
+  submitSearch(BuildContext context) {
+    List<Item> searchItemList = [];
+    for (var element in itemsList) {
+      if(element.name.toUpperCase().contains(searchTxt.toUpperCase())){
+        searchItemList.add(element);
+      }
+    }
+    
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) { //prevent "setState() or markNeedsBuild called during build" error
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MoreItemsScreen(itemList: searchItemList)));
+    });
+
+  }
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -35,8 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //buildAppBar(bodyMargin),
-            const SizedBox(height: 32,),
+            const SizedBox(height: 16,),
             //header text
             Padding(
               padding: EdgeInsets.symmetric(horizontal: bodyMargin),
@@ -75,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 alignment: Alignment.centerRight,
                   child: TextButton(onPressed: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> MoreItemsScreen(itemList: itemsList,)));
-                  }, child: Text('see more',style: Theme.of(context).textTheme.bodyText2,))),
+                  }, child: Text('see more',style: Theme.of(context).textTheme.bodyText2?.copyWith(fontWeight: FontWeight.bold),))),
             ),
             Padding(
               padding: EdgeInsets.only(left: bodyMargin),
@@ -110,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMargin),
           child: TextField(
+            textInputAction: TextInputAction.search,
             decoration: const InputDecoration(
             prefixIcon: Icon(Icons.search,color: Colors.black,),
             fillColor: SolidColors.textFieldInside,
@@ -129,11 +143,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 searchTxt = value;
               });
             },
+            onSubmitted: (String value) {
+              submitSearch(context);
+              },
+
 
           ),
         );
   }
 }
+
+
 
 
 
