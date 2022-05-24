@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/models/category.dart';
 import 'package:food_delivery/models/item.dart';
+import 'package:food_delivery/screens/more_items_screen/more_items_screen.dart';
 
 import '../item_details/ItemDetails.dart';
 import 'components/bottom_nav_bar.dart';
@@ -72,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(right: bodyMargin),
               child: Align(
                 alignment: Alignment.centerRight,
-                  child: TextButton(onPressed: (){}, child: Text('see more',style: Theme.of(context).textTheme.bodyText2,))),
+                  child: TextButton(onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> MoreItemsScreen(itemList: itemsList,)));
+                  }, child: Text('see more',style: Theme.of(context).textTheme.bodyText2,))),
             ),
             Padding(
               padding: EdgeInsets.only(left: bodyMargin),
@@ -87,13 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context,index)=>Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
                       child: FoodItem(
-                      width: size.width/2.5,
-                        name: itemsList[index].name,
-                        price: itemsList[index].price,
-                        img: itemsList[index].img,
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ItemDetailsScreen(item: itemsList[index])));
-                        },
+                      width: size.width/2.5, item: itemsList[index],
                 ),
                     )
                 ),

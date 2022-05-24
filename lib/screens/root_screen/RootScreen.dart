@@ -17,22 +17,19 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
 
   var _bottomNavItemIndex = 0;
-  Padding buildAppBar(double bodyMargin) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: bodyMargin),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            onPressed: () {  },
-            icon: SvgPicture.asset('assets/icons/menu_icon.svg',width: 24,height: 24,),
-          ),
-          IconButton(
-            onPressed: () {  },
-            icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,),
-          ),
-        ],
-      ),
+  Widget buildAppBar(double bodyMargin) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+          onPressed: () {  },
+          icon: SvgPicture.asset('assets/icons/menu_icon.svg',width: 24,height: 24,),
+        ),
+        IconButton(
+          onPressed: () {  },
+          icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,),
+        ),
+      ],
     );
   }
 

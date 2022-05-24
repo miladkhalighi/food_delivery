@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
+import '../../../models/item.dart';
+import '../../item_details/ItemDetails.dart';
 
 class FoodItem extends StatelessWidget {
   final double width;
-  final String img;
-  final String name;
-  final String price;
-  final Function() onTap;
+  final Item item;
 
-  const FoodItem({Key? key,this.width=150,
-    required this.img,
-    required this.name,
-    required this.price,
-    required this.onTap
+  const FoodItem({
+    Key? key,
+    this.width=150,
+    required this.item,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ItemDetailsScreen(item: item)));
+      },
       child: SizedBox(
         width: width,
         height: width * 1.55,
@@ -47,13 +47,13 @@ class FoodItem extends StatelessWidget {
                   children: [
                     const Spacer(),
                     Text(
-                      name,
+                      item.name,
                       style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 26),
                       maxLines: 2,
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: width * 0.1,),
-                    Text(price,style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 20,color: SolidColors.primaryColor),),
+                    Text(item.price,style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 20,color: SolidColors.primaryColor),),
                     SizedBox(height: width * 0.15,)
                   ],
                 ),
@@ -65,14 +65,14 @@ class FoodItem extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Hero(
-                  tag: name,
+                  tag: item.name,
                   child: Container(
                     width: width - width * 0.15,
                     height: width - width * 0.15,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                            image: AssetImage(img),
+                            image: AssetImage(item.img),
                             fit: BoxFit.cover
                         ),
                         boxShadow: [
