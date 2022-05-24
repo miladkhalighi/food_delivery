@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/screens/home_screen/home_screen.dart';
 import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
 
@@ -40,26 +42,26 @@ class _RootScreenState extends State<RootScreen> {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.07;
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(title: buildAppBar(bodyMargin),),
-        body: IndexedStack(
-          index: _bottomNavItemIndex,
-          children: const [
-            HomeScreen(),
-            SizedBox(), //todo : replace screen with sizedbox
-            ProfileScreen(),
-            SizedBox() ////todo : replace screen with sizedbox
-          ],
-        ),
-        bottomNavigationBar: BottomNavBar(
-          selectedItemIndex: _bottomNavItemIndex,
-          onTap: (value ) {
-            setState(() {
-              _bottomNavItemIndex = value;
-            });
-          },),
+    return Scaffold(
+      appBar: AppBar(
+        title: buildAppBar(bodyMargin),
       ),
+      body: IndexedStack(
+        index: _bottomNavItemIndex,
+        children: const [
+          HomeScreen(),
+          SizedBox(), //todo : replace screen with sizedbox
+          ProfileScreen(),
+          SizedBox() ////todo : replace screen with sizedbox
+        ],
+      ),
+      bottomNavigationBar: BottomNavBar(
+        selectedItemIndex: _bottomNavItemIndex,
+        onTap: (value ) {
+          setState(() {
+            _bottomNavItemIndex = value;
+          });
+        },),
     );
   }
 }

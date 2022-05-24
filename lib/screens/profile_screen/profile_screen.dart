@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
 
 import 'components/profile_listtile.dart';
@@ -14,55 +15,60 @@ class ProfileScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.07;
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: bodyMargin),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'My profile',
-                  style: textTheme.headline2,
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                TitleWithTextButton(
-                  buttonText: 'change',
-                  title: 'Personal details',
-                  onPressed: () {},
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: 200, //todo : change dynamic size
-                  child: buildProfileCard(textTheme),
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                ProfileListTile(title: 'Orders', onTap: () {  },),
-                const SizedBox(height: 32,),
-                ProfileListTile(title: 'Pending reviews', onTap: () {  },),
-                const SizedBox(height: 32,),
-                ProfileListTile(title: 'Faq', onTap: () {  },),
-                const SizedBox(height: 32,),
-                ProfileListTile(title: 'Help', onTap: () {  },),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: SolidColors.backgroundScreens,
+        appBar: AppBar(
+          backgroundColor: SolidColors.backgroundScreens,
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'My profile',
+                    style: textTheme.headline2,
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  TitleWithTextButton(
+                    buttonText: 'change',
+                    title: 'Personal details',
+                    onPressed: () {},
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  SizedBox(
+                    height: 200, //todo : change dynamic size
+                    child: buildProfileCard(textTheme),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  ProfileListTile(title: 'Orders', onTap: () {  },),
+                  const SizedBox(height: 32,),
+                  ProfileListTile(title: 'Pending reviews', onTap: () {  },),
+                  const SizedBox(height: 32,),
+                  ProfileListTile(title: 'Faq', onTap: () {  },),
+                  const SizedBox(height: 32,),
+                  ProfileListTile(title: 'Help', onTap: () {  },),
 
 
-              ],
-            ),
-            const SizedBox(height: 64,),
-            SizedBox(
-                height: 64,
-                child: ElevatedButton(onPressed: (){}, child: const Text('Update'))),
-            const SizedBox(height: 16,),
-          ],
+                ],
+              ),
+              const SizedBox(height: 64,),
+              SizedBox(
+                  height: 64,
+                  child: ElevatedButton(onPressed: (){}, child: const Text('Update'))),
+              const SizedBox(height: 16,),
+            ],
+          ),
         ),
       ),
     );

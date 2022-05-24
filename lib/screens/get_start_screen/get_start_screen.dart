@@ -17,9 +17,12 @@ class GetStartScreen extends StatelessWidget {
     var bodyMargin = size.width * 0.1;
     var avatorHeights = size.height/2;
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: SolidColors.getStartScreenBackground,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: SolidColors.getStartScreenBackground,
+          statusBarBrightness: Brightness.light,
+        ),
       ),
       backgroundColor: SolidColors.getStartScreenBackground,
       body: Column(
