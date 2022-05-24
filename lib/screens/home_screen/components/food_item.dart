@@ -29,6 +29,7 @@ class FoodItem extends StatelessWidget {
               top : width /4,
               left: 0,
               right: 0,
+              bottom: 0,
               child: Container(
                 height: width * 2 / 1.5,
                 decoration: const BoxDecoration(
@@ -66,8 +67,8 @@ class FoodItem extends StatelessWidget {
                 child: Hero(
                   tag: name,
                   child: Container(
-                    width: width - width * 0.2,
-                    height: width - width * 0.2,
+                    width: width - width * 0.15,
+                    height: width - width * 0.15,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
