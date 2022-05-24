@@ -15,12 +15,7 @@ class ItemDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: SolidColors.backgroundScreens,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black.withOpacity(0.8)),
-        actions: [
-          IconButton(onPressed: (){}, icon: SvgPicture.asset('assets/icons/heart.svg',color: Colors.black.withOpacity(0.8) ,))
-        ],
-      ),
+      appBar: buildAppBar(bodyMargin,context),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: bodyMargin),
         child: Column(
@@ -31,8 +26,8 @@ class ItemDetailsScreen extends StatelessWidget {
               child: Hero(
                 tag: item.name,
                 child: Container(
-                  width: size.width/2.5,
-                  height: size.width/2.5,
+                  width: size.width/1.8,
+                  height: size.width/1.8,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -60,7 +55,7 @@ class ItemDetailsScreen extends StatelessWidget {
             Center(child: Text(item.price,style: Theme.of(context).textTheme.bodyText1?.copyWith(fontSize: 20,color: SolidColors.primaryColor))),
             const SizedBox(height: 32,),
             SizedBox(
-              height: size.height/3,
+              height: size.height/3.5,
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
@@ -91,6 +86,26 @@ class ItemDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16,),
 
+          ],
+        ),
+      ),
+    );
+  }
+
+  AppBar buildAppBar(double bodyMargin,BuildContext context) {
+    return AppBar(
+      iconTheme: IconThemeData(color: Colors.black.withOpacity(0.8)),
+      automaticallyImplyLeading: false,
+      title: Padding(
+        padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(onPressed: (){
+              Navigator.pop(context);
+            }, icon: const Icon(Icons.arrow_back,color: Colors.black,)),
+            IconButton(onPressed: (){},
+                icon: SvgPicture.asset('assets/icons/heart.svg',color: Colors.black.withOpacity(0.8) ,)),
           ],
         ),
       ),
