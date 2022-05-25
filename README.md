@@ -6,7 +6,7 @@ it is convinient for begginers who wants to make responsive ui
 # ScreenShots
 
 <p align="center">
-  <img src="https://pasteboard.co/SfwerWrZs1zK.png" width="350" title="hover text">
+  <img src="https://pasteboard.co/SfwerWrZs1zK.png" width="350">
 </p>
 
 ## Getting Started
