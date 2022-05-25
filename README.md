@@ -1,10 +1,15 @@
 # food_delivery
 
-A new Flutter project.
+This is a flutter "Food Delivery" app 
+it is convinient for begginers who wants to make responsive ui
+
+# ScreenShots
+
+<p align="center">
+  <img src="https://pasteboard.co/SfwerWrZs1zK.png" width="350">
+</p>
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
