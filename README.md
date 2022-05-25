@@ -5,9 +5,7 @@ it is convinient for begginers who wants to make responsive ui
 
 # ScreenShots
 
-<p align="center">
-  <img src="https://pasteboard.co/SfwerWrZs1zK.png" width="350">
-</p>
+![screenshot](https://github.com/[miladkhalighi]/[Food-Delivery-App]/blob/[master]/assets/images/screenShot.png?raw=true)
 
 ## Getting Started
 
