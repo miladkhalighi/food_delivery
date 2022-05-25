@@ -1,7 +1,11 @@
 # food_delivery
 
 This is a flutter "Food Delivery" app 
-it is convinient for begginers who wants to make responsive ui
+it is convenient for beginners who wants to be familiar with :
+- basic widgets
+- responsive UI
+- clean code
+- state management
 
 ## ScreenShots
 
