@@ -3,9 +3,9 @@
 This is a flutter "Food Delivery" app 
 it is convinient for begginers who wants to make responsive ui
 
-# ScreenShots
+## ScreenShots
 
-![screenshot](https://github.com/[miladkhalighi]/[Food-Delivery-App]/blob/[master]/assets/images/screenShot.png?raw=true)
+![screenshot](assets/images/screenShot.png?raw=true "Title")
 
 ## Getting Started
 
