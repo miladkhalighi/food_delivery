@@ -5,7 +5,9 @@ it is convinient for begginers who wants to make responsive ui
 
 # ScreenShots
 
-![alt text]([http://url/to/img.png](https://pasteboard.co/SfwerWrZs1zK.png))
+<p align="center">
+  <img src="https://pasteboard.co/SfwerWrZs1zK.png" width="350" title="hover text">
+</p>
 
 ## Getting Started
 
