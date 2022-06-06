@@ -48,25 +48,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget gridFoodItems(double bodyMargin, Size size, FoodController _foodController) {
-    return Padding(
-            padding: EdgeInsets.only(left: bodyMargin),
-            child: SizedBox(
-              width: double.infinity,
-              height: size.height/2.5,
-              child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _foodController.itemsList.length,
-                  itemBuilder: (context,index)=>Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
-                    child: FoodItem(
-                    width: size.width/2.5, item: _foodController.itemsList[index],
-              ),
-                  )
-              ),
-            )
-          );
+    return SizedBox(
+      width: double.infinity,
+      height: size.height/2.5,
+      child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: _foodController.itemsList.length,
+          itemBuilder: (context,index)=>Padding(
+            padding: EdgeInsets.fromLTRB(index == 0 ? bodyMargin : 16,16,index == _foodController.itemsList.length-1 ? bodyMargin : 16,16),
+            child: FoodItem(
+            width: size.width/2.5, item: _foodController.itemsList[index],
+      ),
+          )
+      ),
+    );
   }
 
   Widget buildSeeMoreBtn(double bodyMargin, BuildContext context, FoodController _foodController) {
@@ -81,29 +78,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildCategoriesWidget(double bodyMargin, Size size, CategoryController _categoryController) {
-    return Padding(
-            padding: EdgeInsets.only(left: bodyMargin),
-            child: SizedBox(
-              height: size.height * 0.07,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: _categoryController.categoryList.length,
-                itemBuilder: (context,index){
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Obx(() =>
-                      CategoryItem(name: _categoryController.categoryList[index].name, pressed: (){
-                        _categoryController.categoryItemIndex.value = index;
-                      },
-                       enabled: _categoryController.categoryItemIndex.value == index ? true : false,
-                      ),
-                    ),
-                  );
-              }),
+    return SizedBox(
+      height: size.height * 0.07,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: _categoryController.categoryList.length,
+        itemBuilder: (context,index){
+          return Padding(
+            padding: EdgeInsets.fromLTRB(index==0 ? bodyMargin : 8,8,index==_categoryController.categoryList.length-1 ? bodyMargin : 8,8),
+            child: Obx(() =>
+              CategoryItem(name: _categoryController.categoryList[index].name, pressed: (){
+                _categoryController.categoryItemIndex.value = index;
+              },
+               enabled: _categoryController.categoryItemIndex.value == index ? true : false,
+              ),
             ),
           );
+      }),
+    );
   }
 
   Widget buildHeaderText(double bodyMargin, BuildContext context) {
