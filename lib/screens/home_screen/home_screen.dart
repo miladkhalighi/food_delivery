@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    var size = MediaQuery.of(context).size;
+    var size = Get.size;
     var bodyMargin = size.width * 0.07;
     var _foodController  = Get.find<FoodController>();
     var _categoryController  = Get.find<CategoryController>();
@@ -35,11 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 16,),
             buildHeaderText(bodyMargin, context),
-            const SizedBox(height: 32,),
             searchBar(bodyMargin),
-            const SizedBox(height: 32,),
             buildCategoriesWidget(bodyMargin, size, _categoryController),
             buildSeeMoreBtn(bodyMargin, context, _foodController),
             gridFoodItems(bodyMargin, size, _foodController),
@@ -111,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget buildHeaderText(double bodyMargin, BuildContext context) {
     return Padding(
-            padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+            padding: EdgeInsets.fromLTRB(bodyMargin,16,bodyMargin,0),
             child: Text('Delicious \nfood for you',style: Theme.of(context).textTheme.headline2,),
           );
   }
@@ -119,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget searchBar(double bodyMargin) {
     var _foodController  = Get.find<FoodController>();
     return Padding(
-          padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+          padding: EdgeInsets.symmetric(horizontal: bodyMargin,vertical: 32),
           child: TextField(
             controller: _foodController.searchBarController,
             textInputAction: TextInputAction.search,
