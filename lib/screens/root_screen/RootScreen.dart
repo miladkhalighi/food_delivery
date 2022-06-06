@@ -53,9 +53,8 @@ class _RootScreenState extends State<RootScreen> {
       appBar: AppBar(
         title: buildAppBar(bodyMargin),
       ),
-      body: GetBuilder<NavigatorController>(
-        id: 'change nav item index',
-        builder: (context) =>
+      body: Obx(
+        () =>
         IndexedStack(
           index: _navigatorController.navItemIndexSelected.value,
           children: screens,

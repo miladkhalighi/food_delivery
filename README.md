@@ -5,7 +5,7 @@ it is convenient for beginners who wants to be familiar with :
 - basic widgets
 - responsive UI
 - clean code
-- getX state management
+- reactive state management (getX)
 
 ## ScreenShots
 

@@ -6,6 +6,5 @@ class NavigatorController extends GetxController{
 
   void changeNavItemIndex(int index){
     navItemIndexSelected.value = index;
-    update(['change nav item index']);
   }
 }
