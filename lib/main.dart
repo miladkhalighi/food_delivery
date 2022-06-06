@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_delivery/bindings/bindings.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/screens/get_start_screen/get_start_screen.dart';
 import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
 
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      initialBinding: MyBindings(),
       title: 'Food Delivery',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

@@ -3,14 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/controllers/food_controller.dart';
 import 'package:food_delivery/models/category.dart';
 import 'package:food_delivery/models/item.dart';
 import 'package:food_delivery/screens/more_items_screen/more_items_screen.dart';
-
-import '../item_details/ItemDetails.dart';
-import 'components/bottom_nav_bar.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'components/category_item.dart';
 import 'components/food_item.dart';
 
@@ -21,27 +20,15 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-  String searchTxt = "";
   var _categoryItemIndex = 0;
-  submitSearch(BuildContext context) {
-    List<Item> searchItemList = [];
-    for (var element in itemsList) {
-      if(element.name.toUpperCase().contains(searchTxt.toUpperCase())){
-        searchItemList.add(element);
-      }
-    }
-    
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) { //prevent "setState() or markNeedsBuild called during build" error
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MoreItemsScreen(itemList: searchItemList)));
-    });
 
-  }
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.07;
+    var _foodController  = Get.find<FoodController>();
     return Scaffold(
       backgroundColor: SolidColors.backgroundScreens,
       body: SingleChildScrollView(
@@ -87,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Align(
                 alignment: Alignment.centerRight,
                   child: TextButton(onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> MoreItemsScreen(itemList: itemsList,)));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> MoreItemsScreen(itemList: _foodController.itemsList,)));
                   }, child: Text('see more',style: Theme.of(context).textTheme.bodyText2?.copyWith(fontWeight: FontWeight.bold),))),
             ),
             Padding(
@@ -99,11 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: itemsList.length,
+                    itemCount: _foodController.itemsList.length,
                     itemBuilder: (context,index)=>Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
                       child: FoodItem(
-                      width: size.width/2.5, item: itemsList[index],
+                      width: size.width/2.5, item: _foodController.itemsList[index],
                 ),
                     )
                 ),
@@ -116,13 +103,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
-
-
   Padding searchBar(double bodyMargin) {
+    var _foodController  = Get.find<FoodController>();
     return Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMargin),
           child: TextField(
+            controller: _foodController.searchBarController,
             textInputAction: TextInputAction.search,
             decoration: const InputDecoration(
             prefixIcon: Icon(Icons.search,color: Colors.black,),
@@ -140,11 +126,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             onChanged: (value ){
               setState(() {
-                searchTxt = value;
+                _foodController.searchItemName = value;
               });
             },
             onSubmitted: (String value) {
-              submitSearch(context);
+              _foodController.submitSearch();
               },
 
 
