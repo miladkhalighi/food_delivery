@@ -1,12 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/controllers/category_controller.dart';
 import 'package:food_delivery/controllers/food_controller.dart';
-import 'package:food_delivery/models/category.dart';
-import 'package:food_delivery/models/item.dart';
 import 'package:food_delivery/screens/more_items_screen/more_items_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -20,8 +18,6 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-  var _categoryItemIndex = 0;
-
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -29,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.07;
     var _foodController  = Get.find<FoodController>();
+    var _categoryController  = Get.find<CategoryController>();
+
     return Scaffold(
       backgroundColor: SolidColors.backgroundScreens,
       body: SingleChildScrollView(
@@ -53,16 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  itemCount: categoryList.length,
+                  itemCount: _categoryController.categoryList.length,
                   itemBuilder: (context,index){
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: CategoryItem(name: categoryList[index].name, pressed: (){
-                          setState(() {
-                            _categoryItemIndex = index;
-                          });
-                      },
-                       enabled: index == _categoryItemIndex ? true : false,
+                      child: Obx(() =>
+                        CategoryItem(name: _categoryController.categoryList[index].name, pressed: (){
+                          _categoryController.categoryItemIndex.value = index;
+                        },
+                         enabled: _categoryController.categoryItemIndex.value == index ? true : false,
+                        ),
                       ),
                     );
                 }),
