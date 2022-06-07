@@ -3,9 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/controllers/drawer_controller.dart';
 import 'package:food_delivery/controllers/navigator_controller.dart';
 import 'package:food_delivery/models/drawer_model.dart';
+import 'package:food_delivery/screens/history_screen/history_screen.dart';
 import 'package:food_delivery/screens/home_screen/home_screen.dart';
+import 'package:food_delivery/screens/liked_screen/liked_screen.dart';
 import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +24,8 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
 
   final _navigatorController = Get.find<NavigatorController>();
-  final _advancedDrawerController = AdvancedDrawerController();
+  final _drawerController = Get.find<MyDrawerController>();
+
 
   Widget buildAppBar(double bodyMargin) {
     return Row(
@@ -29,7 +33,7 @@ class _RootScreenState extends State<RootScreen> {
       children: [
         IconButton(
           onPressed: () {
-            _advancedDrawerController.showDrawer();
+            _drawerController.advancedDrawerController.showDrawer();
           },
           icon: SvgPicture.asset('assets/icons/menu_icon.svg',width: 24,height: 24,),
         ),
@@ -49,14 +53,14 @@ class _RootScreenState extends State<RootScreen> {
 
     List<Widget> screens = const [
       HomeScreen(),
-      SizedBox(), //todo : replace screen with sizedbox
+      LikedScreen(),
       ProfileScreen(),
-      SizedBox() ////todo : replace screen with sizedbox
+      HistoryScreen()
     ];
 
     return AdvancedDrawer(
       backdropColor: SolidColors.primaryColor,
-      controller: _advancedDrawerController,
+      controller: _drawerController.advancedDrawerController,
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
       animateChildDecoration: true,
@@ -112,7 +116,31 @@ class _RootScreenState extends State<RootScreen> {
             physics: const BouncingScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
-                onTap: (){},
+                onTap: (){
+                  _drawerController.changeDrawerItemIndex(index);
+                  switch (_drawerController.drawerItemIndex.value){
+                    case 0 :
+                      _navigatorController.changeNavItemIndex(2);
+                      _drawerController.advancedDrawerController.hideDrawer();
+                      //Get.to(()=> const ProfileScreen());
+                      break;
+
+                    case 1 :
+                      break;
+
+                    case 2 :
+                      break;
+
+                    case 3 :
+                      break;
+
+                    case 4 :
+                      break;
+
+                    case 5 :
+                      break;
+                  }
+                },
                 horizontalTitleGap: 0,
                 title: Text(drawerList[index].title,
                   style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white),),
@@ -125,7 +153,9 @@ class _RootScreenState extends State<RootScreen> {
           ),
           const Spacer(),
           InkWell(
-            onTap: (){},
+            onTap: (){
+              _drawerController.changeDrawerItemIndex(drawerList.length);
+            },
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Row(children: [
