@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 class DrawerModel {
   String title;
-  IconData icon;
+  String iconPath;
 
-  DrawerModel({required this.title,required this.icon});
+  DrawerModel({required this.title,required this.iconPath});
 }
 
  List<DrawerModel> drawerList = [
-   DrawerModel(title: 'Profile', icon: Icons.add),
-   DrawerModel(title: 'Orders', icon: Icons.add),
-   DrawerModel(title: 'Offer and promo', icon: Icons.add),
-   DrawerModel(title: 'Privacy policy', icon: Icons.add),
-   DrawerModel(title: 'Security', icon: Icons.add),
-   DrawerModel(title: 'Sign-out', icon: Icons.add),
+   DrawerModel(title: 'Profile', iconPath: "assets/icons/gg_profile.svg"),
+   DrawerModel(title: 'Orders', iconPath: "assets/icons/icons8_buy.svg"),
+   DrawerModel(title: 'Offer and promo', iconPath: "assets/icons/ic_outline-local-offer.svg"),
+   DrawerModel(title: 'Privacy policy', iconPath: "assets/icons/ic_outline-sticky-note-2.svg"),
+   DrawerModel(title: 'Security', iconPath: "assets/icons/security.svg"),
+   DrawerModel(title: 'Sign-out', iconPath: "assets/icons/arrow.svg"),
  ];

@@ -62,35 +62,41 @@ class _RootScreenState extends State<RootScreen> {
       animateChildDecoration: true,
       rtlOpening: false,
       openScale: 0.7,
-      openRatio: 1/2.5,
+      openRatio: 1/2.2,
       disabledGestures: false,
+      childDecoration: const BoxDecoration(
+        // NOTICE: Uncomment if you want to add shadow behind the page.
+        // Keep in mind that it may cause animation jerks.
+        borderRadius: BorderRadius.all(Radius.circular(30)),
+      ),
       drawer: buildDrawer(),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: buildAppBar(bodyMargin),
-          ),
+      child: buildScaffoldPage(bodyMargin, screens),
+    );
+  }
 
-          body: Obx(
-            () =>
-            IndexedStack(
-              index: _navigatorController.navItemIndexSelected.value,
-              children: screens,
-            ),
-          ),
-          bottomNavigationBar: Obx(() =>
-            BottomNavBar(
-              selectedItemIndex: _navigatorController.navItemIndexSelected.value,
-              onTap: (value ) {
-                _navigatorController.navItemIndexSelected.value = value;
-                _navigatorController.changeNavItemIndex(_navigatorController.navItemIndexSelected.value);
-              },),
+  Scaffold buildScaffoldPage(double bodyMargin, List<Widget> screens) {
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: buildAppBar(bodyMargin),
+        ),
+
+        body: Obx(
+          () =>
+          IndexedStack(
+            index: _navigatorController.navItemIndexSelected.value,
+            children: screens,
           ),
         ),
-      ),
-    );
+        bottomNavigationBar: Obx(() =>
+          BottomNavBar(
+            selectedItemIndex: _navigatorController.navItemIndexSelected.value,
+            onTap: (value ) {
+              _navigatorController.navItemIndexSelected.value = value;
+              _navigatorController.changeNavItemIndex(_navigatorController.navItemIndexSelected.value);
+            },),
+        ),
+      );
   }
 
   Widget buildDrawer() {
@@ -100,7 +106,7 @@ class _RootScreenState extends State<RootScreen> {
       child: Column(
         children: [
           SizedBox(height: Get.height* 0.1,),
-          ListView.builder(
+          ListView.separated(
             itemCount: drawerList.length-1,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
@@ -110,21 +116,27 @@ class _RootScreenState extends State<RootScreen> {
                 horizontalTitleGap: 0,
                 title: Text(drawerList[index].title,
                   style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white),),
-                leading: Icon(drawerList[index].icon,color: Colors.white,),
+                leading: SvgPicture.asset(drawerList[index].iconPath,color: Colors.white,)
               );
+            }, separatorBuilder: (BuildContext context, int index) {
+              return Divider(color: Colors.white.withOpacity(0.3),thickness: 2,indent: 60,);
             },
 
           ),
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-            child: Row(children: [
-              Text(drawerList.last.title,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white),
-              ),
-              const SizedBox(width: 8,),
-              Icon(drawerList.last.icon,color: Colors.white,),
-            ],),
+          InkWell(
+            onTap: (){},
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(children: [
+                Text(drawerList.last.title,
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white),
+                ),
+                const SizedBox(width: 8,),
+                SvgPicture.asset(drawerList.last.iconPath,color: Colors.white,)
+                //Icon(drawerList.last.icon,color: Colors.white,),
+              ],),
+            ),
           ),
           SizedBox(height: Get.height* 0.2,),
         ],
