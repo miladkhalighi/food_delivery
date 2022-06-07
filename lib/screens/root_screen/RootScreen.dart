@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/controllers/navigator_controller.dart';
+import 'package:food_delivery/models/drawer_model.dart';
 import 'package:food_delivery/screens/home_screen/home_screen.dart';
 import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
 import 'package:get/get.dart';
@@ -19,13 +21,16 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
 
   final _navigatorController = Get.find<NavigatorController>();
+  final _advancedDrawerController = AdvancedDrawerController();
 
   Widget buildAppBar(double bodyMargin) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
-          onPressed: () {  },
+          onPressed: () {
+            _advancedDrawerController.showDrawer();
+          },
           icon: SvgPicture.asset('assets/icons/menu_icon.svg',width: 24,height: 24,),
         ),
         IconButton(
@@ -49,24 +54,80 @@ class _RootScreenState extends State<RootScreen> {
       SizedBox() ////todo : replace screen with sizedbox
     ];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: buildAppBar(bodyMargin),
-      ),
-      body: Obx(
-        () =>
-        IndexedStack(
-          index: _navigatorController.navItemIndexSelected.value,
-          children: screens,
+    return AdvancedDrawer(
+      backdropColor: SolidColors.primaryColor,
+      controller: _advancedDrawerController,
+      animationCurve: Curves.easeInOut,
+      animationDuration: const Duration(milliseconds: 300),
+      animateChildDecoration: true,
+      rtlOpening: false,
+      openScale: 0.7,
+      openRatio: 1/2.5,
+      disabledGestures: false,
+      drawer: buildDrawer(),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30),
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: buildAppBar(bodyMargin),
+          ),
+
+          body: Obx(
+            () =>
+            IndexedStack(
+              index: _navigatorController.navItemIndexSelected.value,
+              children: screens,
+            ),
+          ),
+          bottomNavigationBar: Obx(() =>
+            BottomNavBar(
+              selectedItemIndex: _navigatorController.navItemIndexSelected.value,
+              onTap: (value ) {
+                _navigatorController.navItemIndexSelected.value = value;
+                _navigatorController.changeNavItemIndex(_navigatorController.navItemIndexSelected.value);
+              },),
+          ),
         ),
       ),
-      bottomNavigationBar: Obx(() =>
-        BottomNavBar(
-          selectedItemIndex: _navigatorController.navItemIndexSelected.value,
-          onTap: (value ) {
-            _navigatorController.navItemIndexSelected.value = value;
-            _navigatorController.changeNavItemIndex(_navigatorController.navItemIndexSelected.value);
-          },),
+    );
+  }
+
+  Widget buildDrawer() {
+    return Drawer(
+      elevation: 0,
+      backgroundColor: SolidColors.primaryColor,
+      child: Column(
+        children: [
+          SizedBox(height: Get.height* 0.1,),
+          ListView.builder(
+            itemCount: drawerList.length-1,
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                onTap: (){},
+                horizontalTitleGap: 0,
+                title: Text(drawerList[index].title,
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white),),
+                leading: Icon(drawerList[index].icon,color: Colors.white,),
+              );
+            },
+
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+            child: Row(children: [
+              Text(drawerList.last.title,
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white),
+              ),
+              const SizedBox(width: 8,),
+              Icon(drawerList.last.icon,color: Colors.white,),
+            ],),
+          ),
+          SizedBox(height: Get.height* 0.2,),
+        ],
       ),
     );
   }

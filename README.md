@@ -6,6 +6,7 @@ it is convenient for beginners who wants to be familiar with :
 - responsive UI
 - clean code
 - reactive state management (getX)
+- dependency injection (DI)
 
 ## ScreenShots
 
