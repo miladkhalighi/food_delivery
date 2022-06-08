@@ -64,12 +64,18 @@ class MyApp extends StatelessWidget {
             fontSize: 14,
             color: SolidColors.buttonTextColorRed
           ),
+          button: TextStyle(
+              fontFamily: 'SF',
+              fontSize: 16,
+              color: Colors.white
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             primary: SolidColors.primaryColor,
             onPrimary: SolidColors.buttonTextColorWhite,
             shape: const StadiumBorder(),
+            textStyle: Theme.of(context).textTheme.button
           ),
         ),
         primarySwatch: Colors.red,
