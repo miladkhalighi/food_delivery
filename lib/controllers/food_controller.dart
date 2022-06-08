@@ -47,23 +47,6 @@ class FoodController extends GetxController{
         deliveryInfo: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet interdum enim, malesuada lacus sem quis. Sed euismod eu rhoncus convallis. Habitasse lacinia sit vestibulum, blandit feugiat accumsan. Eget sed nulla viverra volutpat tellus vestibulum aliquam.'),
   ];
 
-  String searchItemName = "";
-  var searchBarController = TextEditingController();
 
-  List<Item> searchItem(String itemName){
-    List<Item> searchItemList = [];
-    for (var element in itemsList) {
-      if(element.name.toUpperCase().contains(itemName.toUpperCase())){
-        searchItemList.add(element);
-      }
-    }
-    return searchItemList;
-  }
-
-  submitSearch() {
-    if(searchItemName.isNotEmpty){
-      Get.to(() =>MoreItemsScreen(itemList: searchItem(searchItemName)));
-    }
-  }
 
 }

@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/controllers/category_controller.dart';
 import 'package:food_delivery/controllers/food_controller.dart';
+import 'package:food_delivery/controllers/search_controller.dart';
+import 'package:food_delivery/models/item.dart';
 import 'package:food_delivery/screens/more_items_screen/more_items_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -27,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var bodyMargin = size.width * 0.07;
     var _foodController  = Get.find<FoodController>();
     var _categoryController  = Get.find<CategoryController>();
+
 
     return Scaffold(
       backgroundColor: SolidColors.backgroundScreens,
@@ -67,12 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildSeeMoreBtn(double bodyMargin, BuildContext context, FoodController _foodController) {
+    var _searchController  = Get.find<SearchController>();
     return Padding(
             padding: EdgeInsets.only(right: bodyMargin),
             child: Align(
               alignment: Alignment.centerRight,
                 child: TextButton(onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> MoreItemsScreen(itemList: _foodController.itemsList,)));
+                 _searchController.showWholeItems();
+                 Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> const MoreItemsScreen()));
                 }, child: Text('see more',style: Theme.of(context).textTheme.bodyText2?.copyWith(fontWeight: FontWeight.bold),))),
           );
   }
@@ -108,11 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget searchBar(double bodyMargin) {
-    var _foodController  = Get.find<FoodController>();
+    var _searchController  = Get.find<SearchController>();
     return Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMargin,vertical: 32),
           child: TextField(
-            controller: _foodController.searchBarController,
+            controller: _searchController.searchBarController,
             textInputAction: TextInputAction.search,
             decoration: const InputDecoration(
             prefixIcon: Icon(Icons.search,color: Colors.black,),
@@ -130,11 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             onChanged: (value ){
               setState(() {
-                _foodController.searchItemName = value;
+                _searchController.searchItemName= value;
               });
             },
             onSubmitted: (String value) {
-              _foodController.submitSearch();
+              _searchController.searchItemName= value;
+              _searchController.searchItem(_searchController.searchItemName, itemsList);
+              _searchController.submitSearch();
               },
 
 
