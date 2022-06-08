@@ -4,6 +4,7 @@ import 'package:food_delivery/bindings/bindings.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/screens/get_start_screen/get_start_screen.dart';
 import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
@@ -72,6 +73,8 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+
+            minimumSize: Size(Get.size.width * 0.7, 64),
             primary: SolidColors.primaryColor,
             onPrimary: SolidColors.buttonTextColorWhite,
             shape: const StadiumBorder(),

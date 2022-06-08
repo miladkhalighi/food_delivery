@@ -6,6 +6,7 @@ import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/controllers/drawer_controller.dart';
 import 'package:food_delivery/controllers/navigator_controller.dart';
 import 'package:food_delivery/models/drawer_model.dart';
+import 'package:food_delivery/screens/cart_screen/cart_screen.dart';
 import 'package:food_delivery/screens/history_screen/history_screen.dart';
 import 'package:food_delivery/screens/home_screen/home_screen.dart';
 import 'package:food_delivery/screens/liked_screen/liked_screen.dart';
@@ -38,7 +39,9 @@ class _RootScreenState extends State<RootScreen> {
           icon: SvgPicture.asset('assets/icons/menu_icon.svg',width: 24,height: 24,),
         ),
         IconButton(
-          onPressed: () {  },
+          onPressed: () {
+            Get.to(()=> const CartScreen());
+          },
           icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,),
         ),
       ],

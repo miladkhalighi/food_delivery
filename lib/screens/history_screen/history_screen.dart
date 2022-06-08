@@ -22,9 +22,7 @@ class HistoryScreen extends StatelessWidget {
             left: 0,
             right: 0,
             bottom: 8,
-            child: SizedBox(
-              height: 64,
-                child: ElevatedButton(onPressed: (){}, child: const Text('Start odering'))),
+            child: ElevatedButton(onPressed: (){}, child: const Text('Start odering')),
           )
         ],
       ),
