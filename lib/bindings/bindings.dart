@@ -1,4 +1,5 @@
 
+import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/category_controller.dart';
 import 'package:food_delivery/controllers/drawer_controller.dart';
 import 'package:food_delivery/controllers/food_controller.dart';
@@ -14,6 +15,7 @@ class MyBindings extends Bindings{
     Get.lazyPut(() => NavigatorController());
     Get.lazyPut(() => MyDrawerController());
     Get.lazyPut(() => SearchController());
+    Get.lazyPut(() => CartController());
   }
 
 }

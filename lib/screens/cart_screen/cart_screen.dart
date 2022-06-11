@@ -87,9 +87,7 @@ class ItemCard extends StatelessWidget {
       endActionPane: ActionPane(
           extentRatio: 0.4,
           dismissible: DismissiblePane(
-              onDismissed: () {
-            Get.snackbar('dis','mis');
-          }),
+              onDismissed: () {}),
           motion: const DrawerMotion(),
           children: [
             Flexible(

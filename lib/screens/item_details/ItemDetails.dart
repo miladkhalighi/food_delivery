@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/models/item.dart';
+import 'package:get/get.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
   final Item item;
@@ -76,7 +78,9 @@ class ItemDetailsScreen extends StatelessWidget {
             SizedBox(
               height: 64,
               width: double.infinity,
-              child: ElevatedButton(onPressed: (){},
+              child: ElevatedButton(onPressed: (){
+                Get.find<CartController>().addToCart(item);
+              },
                 child: const Text('Add to cart',),
                 style: ElevatedButton.styleFrom(
                     primary: SolidColors.primaryColor,
