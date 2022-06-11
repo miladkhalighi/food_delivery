@@ -71,26 +71,7 @@ class FoodController extends GetxController{
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Laoreet interdum enim, malesuada lacus sem quis. Sed euismod eu rhoncus convallis. Habitasse lacinia sit vestibulum, blandit feugiat accumsan. Eget sed nulla viverra volutpat tellus vestibulum aliquam.'),
   ];
 
-  itemIncrement(Item item){
-    if(item.quantity <9){
-      item.quantity += 1;
-      update(['quantity']);
-    }else{
-      Get.snackbar('title', 'asdad');
-    }
 
-  }
-
-  itemDecrement(Item item){
-    if(item.quantity > 1){
-      item.quantity -= 1;
-      update(['quantity']);
-    }
-    else{
-      Get.snackbar('title', 'asdad');
-    }
-
-  }
 
 
 

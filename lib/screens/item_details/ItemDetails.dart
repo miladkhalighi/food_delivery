@@ -79,7 +79,8 @@ class ItemDetailsScreen extends StatelessWidget {
               height: 64,
               width: double.infinity,
               child: ElevatedButton(onPressed: (){
-                Get.find<CartController>().addToCart(item);
+
+               Get.find<CartController>().addToCart(item);
               },
                 child: const Text('Add to cart',),
                 style: ElevatedButton.styleFrom(

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_delivery/constants/icon_with_texts_widget.dart';
+import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/food_controller.dart';
 import 'package:food_delivery/models/item.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,7 @@ class _CartScreenState extends State<CartScreen> {
 
   var size = Get.size;
   var bodyMargin = Get.size.width * 0.07;
+  final _cartController = Get.find<CartController>();
   
   @override
   Widget build(BuildContext context) {
@@ -38,22 +41,42 @@ class _CartScreenState extends State<CartScreen> {
             ),
             const SizedBox(height: 16,),
             Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: itemsList.length,
-                  itemBuilder: (context,index){
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: bodyMargin,vertical: 8),
-                  child: ItemCard(item: itemsList[index]),
-                );
-              }),
+              child: Obx(
+                  () => _cartController.cartList.isNotEmpty ? 
+                      ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: _cartController.cartList.length,
+                    itemBuilder: (context,index){
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: bodyMargin,vertical: 8),
+                        child: ItemCard(item: _cartController.cartList[index]),
+                      );
+                    }) :
+                      buildEmptyCartList()
+
+              )
             ),
 
           ],
         ),
       ),
     );
+  }
+
+  Stack buildEmptyCartList() {
+    return Stack(children: [
+                      const IconWithTextsWidget(icon: CupertinoIcons.shopping_cart,
+                          title: 'No orders yet',
+                          subTitle: 'Hit the orange button down below to Create an order'),
+                      Positioned(
+                          left: bodyMargin,
+                          right: bodyMargin,
+                          bottom: bodyMargin,
+                          child: ElevatedButton(onPressed: (){
+                            Get.back();
+                          }, child: const Text('Start odering')))
+                    ],);
   }
 
   AppBar buildAppBar(BuildContext context) {
@@ -80,14 +103,16 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var _controller = Get.find<FoodController>();
+    var _controller = Get.find<CartController>();
 
     return Slidable(
       key: ValueKey(item.id),
       endActionPane: ActionPane(
           extentRatio: 0.4,
           dismissible: DismissiblePane(
-              onDismissed: () {}),
+              onDismissed: () {
+                _controller.removeFromCart(item);
+              }),
           motion: const DrawerMotion(),
           children: [
             Flexible(
@@ -107,7 +132,9 @@ class ItemCard extends StatelessWidget {
                     const SizedBox(width: 8,),
                     CircleAvatar(
                       child: IconButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          _controller.removeFromCart(item);
+                          },
                         icon: const Icon(CupertinoIcons.delete,color: Colors.white,),
                       ),
                       backgroundColor: const Color(0xFFDF2C2C),
@@ -117,22 +144,6 @@ class ItemCard extends StatelessWidget {
                 )
               ),
             ),
-            // const Flexible(child: SizedBox(width: 32,)),
-            // Flexible(
-            //   child: SizedBox(
-            //     width: 54,
-            //     height: 54,
-            //     child: Container(color: Colors.blue,)
-            //   ),
-            // ),
-            // const Flexible(child: SizedBox(width: 8,)),
-            // Flexible(
-            //   child: SizedBox(
-            //     width: 54,
-            //     height: 54,
-            //     child: Container(color: const Color(0xFFDF2C2C),),
-            //   ),
-            // ),
           ]
       ),
       child: Stack(
@@ -184,13 +195,13 @@ class ItemCard extends StatelessWidget {
                       child: InkWell(
                           splashColor: Colors.white.withOpacity(0.5),
                           onTap:(){
-                            _controller.itemDecrement(item);
+                            _controller.quantityDecrement(item);
                           },child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
                         child: Text('-',style: TextStyle(color: Colors.white,fontSize: 20),),
                       )),
                     ),
-                    GetBuilder<FoodController>(
+                    GetBuilder<CartController>(
                         id: 'quantity',
                         builder: (GetxController controller) {
                           return Text(item.quantity.toString(),style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.white));
@@ -201,7 +212,7 @@ class ItemCard extends StatelessWidget {
                       child: InkWell(
                         splashColor: Colors.white.withOpacity(0.5),
                           onTap:(){
-                        _controller.itemIncrement(item);
+                        _controller.quantityIncrement(item);
                       },child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
                         child: Text('+',style: TextStyle(color: Colors.white,fontSize: 20),),
