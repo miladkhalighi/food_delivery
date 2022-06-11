@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
 import '../../../models/item.dart';
-import '../../item_details/ItemDetails.dart';
+import '../../details_screen/ItemDetails.dart';
 
 class FoodItem extends StatelessWidget {
   final double width;

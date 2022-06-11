@@ -1,5 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:food_delivery/constants/colors.dart';
@@ -130,6 +130,8 @@ class _RootScreenState extends State<RootScreen> {
                       break;
 
                     case 1 :
+                      _drawerController.advancedDrawerController.hideDrawer();
+                      Get.to(()=> const CartScreen());
                       break;
 
                     case 2 :

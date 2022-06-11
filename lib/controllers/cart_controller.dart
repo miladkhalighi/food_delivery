@@ -16,6 +16,7 @@ class CartController extends GetxController{
       customSnackBar('Add to cart', 'this item has already added to cart');
 
     }else{
+      item.quantity = 1;
       cartList.add(item);
       customSnackBar('Add to cart', '${item.name} successfully added to cart');
       //update(['updateCartList']);
