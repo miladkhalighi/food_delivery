@@ -27,12 +27,12 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           elevation: 0,
           backgroundColor: SolidColors.backgroundScreens,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: SolidColors.statusBarColor,
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: SolidColors.systemNavBarColor,
-            systemNavigationBarIconBrightness: Brightness.dark
-          )
+          // systemOverlayStyle: SystemUiOverlayStyle(
+          //   statusBarColor: SolidColors.statusBarColor,
+          //   statusBarIconBrightness: Brightness.dark,
+          //   systemNavigationBarColor: SolidColors.systemNavBarColor,
+          //   systemNavigationBarIconBrightness: Brightness.dark
+          // )
         ),
         fontFamily: "SF",
         textTheme: const TextTheme(

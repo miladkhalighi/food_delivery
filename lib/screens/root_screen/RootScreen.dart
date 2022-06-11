@@ -27,6 +27,12 @@ class _RootScreenState extends State<RootScreen> {
   final _navigatorController = Get.find<NavigatorController>();
   final _drawerController = Get.find<MyDrawerController>();
 
+  List<Widget> screens = const [
+    HomeScreen(),
+    LikedScreen(),
+    ProfileScreen(),
+    HistoryScreen()
+  ];
 
   Widget buildAppBar(double bodyMargin) {
     return Row(
@@ -54,30 +60,25 @@ class _RootScreenState extends State<RootScreen> {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.07;
 
-    List<Widget> screens = const [
-      HomeScreen(),
-      LikedScreen(),
-      ProfileScreen(),
-      HistoryScreen()
-    ];
-
-    return AdvancedDrawer(
-      backdropColor: SolidColors.primaryColor,
-      controller: _drawerController.advancedDrawerController,
-      animationCurve: Curves.easeInOut,
-      animationDuration: const Duration(milliseconds: 300),
-      animateChildDecoration: true,
-      rtlOpening: false,
-      openScale: 0.7,
-      openRatio: 1/2.2,
-      disabledGestures: false,
-      childDecoration: const BoxDecoration(
-        // NOTICE: Uncomment if you want to add shadow behind the page.
-        // Keep in mind that it may cause animation jerks.
-        borderRadius: BorderRadius.all(Radius.circular(30)),
+    return SafeArea(
+      child: AdvancedDrawer(
+        backdropColor: SolidColors.primaryColor,
+        controller: _drawerController.advancedDrawerController,
+        animationCurve: Curves.easeInOut,
+        animationDuration: const Duration(milliseconds: 300),
+        animateChildDecoration: true,
+        rtlOpening: false,
+        openScale: 0.7,
+        openRatio: 1/2.2,
+        disabledGestures: false,
+        childDecoration: const BoxDecoration(
+          // NOTICE: Uncomment if you want to add shadow behind the page.
+          // Keep in mind that it may cause animation jerks.
+          borderRadius: BorderRadius.all(Radius.circular(30)),
+        ),
+        drawer: buildDrawer(),
+        child: buildScaffoldPage(bodyMargin, screens),
       ),
-      drawer: buildDrawer(),
-      child: buildScaffoldPage(bodyMargin, screens),
     );
   }
 

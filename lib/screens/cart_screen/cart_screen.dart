@@ -18,37 +18,39 @@ class _CartScreenState extends State<CartScreen> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Cart',style: Theme.of(context).textTheme.bodyText1,),
-      ),
-      body: Column(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('Cart',style: Theme.of(context).textTheme.bodyText1,),
+        ),
+        body: Column(
 
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.account_balance),
-              const SizedBox(width: 8,),
-              Text('swipe on an item to delete',style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.black),),
-            ],
-          ),
-          const SizedBox(height: 16,),
-          Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: itemsList.length,
-                itemBuilder: (context,index){
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: bodyMargin,vertical: 8),
-                child: ItemCard(item: itemsList[index]),
-              );
-            }),
-          ),
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.account_balance),
+                const SizedBox(width: 8,),
+                Text('swipe on an item to delete',style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.black),),
+              ],
+            ),
+            const SizedBox(height: 16,),
+            Expanded(
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: itemsList.length,
+                  itemBuilder: (context,index){
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: bodyMargin,vertical: 8),
+                  child: ItemCard(item: itemsList[index]),
+                );
+              }),
+            ),
 
-        ],
+          ],
+        ),
       ),
     );
   }
