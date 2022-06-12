@@ -39,6 +39,7 @@ dependencies:
   get: ^4.6.5
   flutter_advanced_drawer: ^1.3.2
   flutter_slidable: ^1.3.0
+  badges: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,10 @@
 
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/drawer_controller.dart';
 import 'package:food_delivery/controllers/navigator_controller.dart';
 import 'package:food_delivery/models/drawer_model.dart';
@@ -35,6 +37,9 @@ class _RootScreenState extends State<RootScreen> {
   ];
 
   Widget buildAppBar(double bodyMargin) {
+
+    final _cartController = Get.find<CartController>();
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -44,12 +49,20 @@ class _RootScreenState extends State<RootScreen> {
           },
           icon: SvgPicture.asset('assets/icons/menu_icon.svg',width: 24,height: 24,),
         ),
-        IconButton(
-          onPressed: () {
-            //Get.to(()=> const CartScreen());
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const CartScreen()));
-          },
-          icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,),
+        Obx(
+        ()=> Badge(
+          position: BadgePosition.topEnd(top: -5, end: -5),
+          showBadge: _cartController.cartList.isNotEmpty,
+          badgeContent: Text(_cartController.cartList.length.toString(),
+            style: const TextStyle(color: Colors.white,fontSize: 14),),
+          child: IconButton(
+              onPressed: () {
+                //Get.to(()=> const CartScreen());
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const CartScreen()));
+              },
+              icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,),
+            ),
+        ),
         ),
       ],
     );
