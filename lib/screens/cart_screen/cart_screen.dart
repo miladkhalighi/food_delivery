@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/icon_with_texts_widget.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
+import 'package:food_delivery/controllers/liked_controller.dart';
 import 'package:food_delivery/models/item.dart';
 import 'package:get/get.dart';
 
@@ -56,7 +57,8 @@ class _CartScreenState extends State<CartScreen> {
 
               )
             ),
-
+            ElevatedButton(onPressed: (){}, child: const Text('Complete order')),
+            const SizedBox(height: 16,),
           ],
         ),
       ),
@@ -102,7 +104,8 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var _controller = Get.find<CartController>();
+    var _cartController = Get.find<CartController>();
+    var _likedController = Get.find<LikedController>();
 
     return Slidable(
       key: ValueKey(item.id),
@@ -110,7 +113,7 @@ class ItemCard extends StatelessWidget {
           extentRatio: 0.4,
           dismissible: DismissiblePane(
               onDismissed: () {
-                _controller.removeFromCart(item);
+                _cartController.removeFromCart(item);
               }),
           motion: const DrawerMotion(),
           children: [
@@ -121,9 +124,19 @@ class ItemCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CircleAvatar(
-                      child: IconButton(
-                        onPressed: (){},
-                        icon: const Icon(CupertinoIcons.heart,color: Colors.white,),
+                      child: GetBuilder<LikedController>(
+                        id: 'update like',
+                        builder: (builderCnt) =>
+                        IconButton(
+                          onPressed: (){
+                            _likedController.hasliked(item)
+                                ? _likedController.removeFromLike(item)
+                                : _likedController.addToLike(item);
+                          },
+                          icon: _likedController.hasliked(item) ?
+                          const Icon(CupertinoIcons.heart_fill,color: Colors.white,) :
+                          const Icon(CupertinoIcons.heart,color: Colors.white,),
+                        ),
                       ),
                       backgroundColor: const Color(0xFFDF2C2C),
                       radius: 24,
@@ -132,7 +145,7 @@ class ItemCard extends StatelessWidget {
                     CircleAvatar(
                       child: IconButton(
                         onPressed: (){
-                          _controller.removeFromCart(item);
+                          _cartController.removeFromCart(item);
                           },
                         icon: const Icon(CupertinoIcons.delete,color: Colors.white,),
                       ),
@@ -194,7 +207,7 @@ class ItemCard extends StatelessWidget {
                       child: InkWell(
                           splashColor: Colors.white.withOpacity(0.5),
                           onTap:(){
-                            _controller.quantityDecrement(item);
+                            _cartController.quantityDecrement(item);
                           },child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
                         child: Text('-',style: TextStyle(color: Colors.white,fontSize: 20),),
@@ -211,7 +224,7 @@ class ItemCard extends StatelessWidget {
                       child: InkWell(
                         splashColor: Colors.white.withOpacity(0.5),
                           onTap:(){
-                        _controller.quantityIncrement(item);
+                        _cartController.quantityIncrement(item);
                       },child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
                         child: Text('+',style: TextStyle(color: Colors.white,fontSize: 20),),
