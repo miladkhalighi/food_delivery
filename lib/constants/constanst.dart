@@ -17,8 +17,8 @@ void customSnackBar(String title,String msg){
       title,
       msg,
       snackPosition: SnackPosition.TOP,
-      barBlur: 12,
-      backgroundColor: SolidColors.primaryColor.withOpacity(0.2),
+      barBlur: 8,
+      backgroundColor: SolidColors.primaryColor.withOpacity(0.3),
       titleText: Text(title,style: const TextStyle(color: Color(0xFFDF2C2C),fontSize: 18,fontWeight: FontWeight.bold),),
       messageText: Text(msg,style: const TextStyle(color: Colors.black45,fontSize: 15,)
       )

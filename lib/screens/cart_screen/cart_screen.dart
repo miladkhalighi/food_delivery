@@ -60,7 +60,12 @@ class _CartScreenState extends State<CartScreen> {
             Obx(
                 ()=>
                 _cartController.cartList.isNotEmpty ?
-                ElevatedButton(onPressed: (){}, child: const Text('Complete order')) : const SizedBox.shrink()),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+                  child: SizedBox(
+                    width: double.infinity,
+                      child: ElevatedButton(onPressed: (){}, child: const Text('Complete order'))),
+                ) : const SizedBox.shrink()),
             const SizedBox(height: 16,),
           ],
         ),
@@ -74,8 +79,8 @@ class _CartScreenState extends State<CartScreen> {
                           title: 'No orders yet',
                           subTitle: 'Hit the orange button down below to Create an order'),
                       Positioned(
-                          left: bodyMargin*2,
-                          right: bodyMargin*2,
+                          left: bodyMargin,
+                          right: bodyMargin,
                           bottom: 16,
                           child: ElevatedButton(onPressed: (){
                             Get.back();
