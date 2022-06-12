@@ -4,7 +4,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants/icon_with_texts_widget.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
-import 'package:food_delivery/controllers/food_controller.dart';
 import 'package:food_delivery/models/item.dart';
 import 'package:get/get.dart';
 

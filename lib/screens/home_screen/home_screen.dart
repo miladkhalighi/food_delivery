@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     var size = Get.size;
     var bodyMargin = size.width * 0.07;
-    var _foodController  = Get.find<FoodController>();
     var _categoryController  = Get.find<CategoryController>();
 
 
@@ -41,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
             buildHeaderText(bodyMargin, context),
             searchBar(bodyMargin),
             buildCategoriesWidget(bodyMargin, size, _categoryController),
-            buildSeeMoreBtn(bodyMargin, context, _foodController),
-            gridFoodItems(bodyMargin, size, _foodController),
+            buildSeeMoreBtn(bodyMargin, context),
+            gridFoodItems(bodyMargin, size),
 
           ],
         ),
@@ -50,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget gridFoodItems(double bodyMargin, Size size, FoodController _foodController) {
+  Widget gridFoodItems(double bodyMargin, Size size) {
+    var _foodController = Get.find<FoodController>();
     return SizedBox(
       width: double.infinity,
       height: size.height/2.5,
@@ -58,26 +58,29 @@ class _HomeScreenState extends State<HomeScreen> {
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: _foodController.itemsList.length,
+          itemCount: _foodController.totalFooditems.length,
           itemBuilder: (context,index)=>Padding(
-            padding: EdgeInsets.fromLTRB(index == 0 ? bodyMargin : 16,16,index == _foodController.itemsList.length-1 ? bodyMargin : 16,16),
+            padding: EdgeInsets.fromLTRB(index == 0 ? bodyMargin : 16,16,index == _foodController.totalFooditems.length-1 ? bodyMargin : 16,16),
             child: FoodItem(
-            width: size.width/2.5, item: _foodController.itemsList[index],
+            width: size.width/2.5, item: _foodController.totalFooditems[index],
       ),
           )
       ),
     );
   }
 
-  Widget buildSeeMoreBtn(double bodyMargin, BuildContext context, FoodController _foodController) {
+  Widget buildSeeMoreBtn(double bodyMargin, BuildContext context) {
     var _searchController  = Get.find<SearchController>();
     return Padding(
             padding: EdgeInsets.only(right: bodyMargin),
             child: Align(
               alignment: Alignment.centerRight,
                 child: TextButton(onPressed: (){
+
                  _searchController.showWholeItems();
-                 Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> const MoreItemsScreen()));
+                 Get.to( () => const MoreItemsScreen());
+                 //Navigator.of(context).push(MaterialPageRoute(builder: (contex)=> const MoreItemsScreen()));
+
                 }, child: Text('see more',style: Theme.of(context).textTheme.bodyText2?.copyWith(fontWeight: FontWeight.bold),))),
           );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../constants/colors.dart';
 import '../../../models/item.dart';
@@ -18,7 +20,7 @@ class FoodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ItemDetailsScreen(item: item)));
+        Get.to(()=> ItemDetailsScreen(item: item));
       },
       child: SizedBox(
         width: width,
@@ -65,7 +67,7 @@ class FoodItem extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Hero(
-                  tag: item.name,
+                  tag: item.id,
                   child: Container(
                     width: width - width * 0.15,
                     height: width - width * 0.15,

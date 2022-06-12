@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/controllers/food_controller.dart';
 import 'package:food_delivery/controllers/search_controller.dart';
 import 'package:food_delivery/screens/home_screen/components/food_item.dart';
 import 'package:get/get.dart';
@@ -26,35 +26,39 @@ class _MoreItemsScreenState extends State<MoreItemsScreen> {
     return Obx(
         () =>
       Scaffold(
-        appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: Colors.black
-          ),
-          title: TextField(
-            style: Theme.of(context).textTheme.bodyText1,
-            controller: _searchController.searchBarController,
-            textInputAction: TextInputAction.search,
-            decoration: const InputDecoration(
-                filled: false,
-                hintText: 'Search',
-              isDense: false,
-              border: InputBorder.none,
-            ),
-            onChanged: (value ){
-                _searchController.searchItemName = value;
-                _searchController.searchItem(_searchController.searchItemName, itemsList);
-            },
-            // onSubmitted: (String value) {
-            //
-            // },
-
-
-          ),
-          centerTitle: true,
-        ),
+        appBar: buildAppBar(context),
         body: buildBody(context, bodyMargin)
       ),
     );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black
+        ),
+        title: TextField(
+          style: Theme.of(context).textTheme.bodyText1,
+          controller: _searchController.searchBarController,
+          textInputAction: TextInputAction.search,
+          decoration: const InputDecoration(
+              filled: false,
+              hintText: 'Search',
+            isDense: false,
+            border: InputBorder.none,
+          ),
+          onChanged: (value ){
+              _searchController.searchItemName = value;
+              _searchController.searchItem(_searchController.searchItemName, Get.find<FoodController>().totalFooditems);
+          },
+          // onSubmitted: (String value) {
+          //
+          // },
+
+
+        ),
+        centerTitle: true,
+      );
   }
 
   Widget buildBody(BuildContext context, double bodyMargin) {
@@ -82,19 +86,7 @@ class _MoreItemsScreenState extends State<MoreItemsScreen> {
       ),
     );
   }
-
-  // StaggeredGrid buildStaggeredGrid(double bodyMargin) {
-  //   return StaggeredGrid.count(
-  //     crossAxisCount: 2,
-  //     crossAxisSpacing: bodyMargin,
-  //     mainAxisSpacing: bodyMargin,
-  //       children: List.generate(
-  //           _searchController.searchItemList.length, (index) =>
-  //           StaggeredGridTile.count(crossAxisCellCount: 1, mainAxisCellCount: index.isEven? 1.6 :2, child: FoodItem(item: widget.itemList[index],)),
-  //       )
-  //   );
-  // }
-
+  
   GridView buildGridView(double bodyMargin) {
     return GridView.count(
         shrinkWrap: true,
