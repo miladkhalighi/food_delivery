@@ -16,12 +16,11 @@ class ItemDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.07;
-    final _likedController = Get.find<LikedController>();
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: SolidColors.backgroundScreens,
-        appBar: buildAppBar(bodyMargin, context, _likedController),
+        appBar: buildAppBar(bodyMargin, context),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMargin),
           child: Column(
@@ -136,7 +135,9 @@ class ItemDetailsScreen extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar(double bodyMargin, BuildContext context, LikedController _likedController) {
+  AppBar buildAppBar(double bodyMargin, BuildContext context) {
+    final _likedController = Get.find<LikedController>();
+
     return AppBar(
         iconTheme: IconThemeData(color: Colors.black.withOpacity(0.8)),
         automaticallyImplyLeading: false,
@@ -153,8 +154,9 @@ class ItemDetailsScreen extends StatelessWidget {
                     Icons.arrow_back,
                     color: Colors.black,
                   )),
-              Obx(
-                () => IconButton(
+              GetBuilder<LikedController>(
+                id: 'update like',
+                builder: (context) => IconButton(
                     onPressed: () {
                       _likedController.hasliked(item)
                           ? _likedController.removeFromLike(item)

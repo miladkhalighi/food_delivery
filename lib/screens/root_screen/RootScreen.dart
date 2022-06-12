@@ -46,7 +46,8 @@ class _RootScreenState extends State<RootScreen> {
         ),
         IconButton(
           onPressed: () {
-            Get.to(()=> const CartScreen());
+            //Get.to(()=> const CartScreen());
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const CartScreen()));
           },
           icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,),
         ),

@@ -6,7 +6,6 @@ import 'package:food_delivery/screens/home_screen/components/food_item.dart';
 import 'package:get/get.dart';
 
 import '../../constants/icon_with_texts_widget.dart';
-import '../../models/item.dart';
 
 class MoreItemsScreen extends StatefulWidget {
   const MoreItemsScreen({Key? key}) : super(key: key);

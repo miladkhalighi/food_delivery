@@ -20,7 +20,8 @@ class FoodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Get.to(()=> ItemDetailsScreen(item: item));
+        //Get.to(()=> ItemDetailsScreen(item: item));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ItemDetailsScreen(item: item)));
       },
       child: SizedBox(
         width: width,

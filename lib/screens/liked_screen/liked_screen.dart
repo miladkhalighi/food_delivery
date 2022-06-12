@@ -6,20 +6,20 @@ import 'package:get/get.dart';
 import '../../constants/icon_with_texts_widget.dart';
 import '../home_screen/components/food_item.dart';
 
-class LikedScreen extends StatelessWidget {
+class LikedScreen extends GetView<LikedController>  {
   const LikedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    var size = MediaQuery.of(context).size;
-    var bodyMargin = size.width * 0.07;
-
-    return SafeArea(
+    return const SafeArea(
         child: Scaffold(
-          body: Obx(
-              ()=> buildBody(context, bodyMargin)),
-        )
+            body: IconWithTextsWidget(
+              icon: CupertinoIcons.heart,
+              title: 'There is not any favorite item',
+              subTitle: '',
+            )
+        ),
     );
   }
 
