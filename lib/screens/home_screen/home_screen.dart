@@ -137,9 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )
             ),
             onChanged: (value ){
-              setState(() {
                 _searchController.searchItemName= value;
-              });
             },
             onSubmitted: (String value) {
               _searchController.searchItemName= value;
