@@ -10,7 +10,7 @@ it is convenient for beginners who wants to be familiar with :
 
 ## ScreenShots
 
-![screenshot](assets/images/screenShot.png?raw=true "Title")
+![screenshot](assets/images/food_delivery_cover.png?raw=true "Title")
 
 ## Getting Started
 
