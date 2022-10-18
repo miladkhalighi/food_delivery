@@ -1,6 +1,8 @@
 
 import 'package:badges/badges.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:food_delivery/constants/colors.dart';
@@ -111,12 +113,105 @@ class _RootScreenState extends State<RootScreen> {
           ),
         ),
         bottomNavigationBar: Obx(() =>
-          BottomNavBar(
-            selectedItemIndex: _navigatorController.navItemIndexSelected.value,
+          BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            showUnselectedLabels: false,
+            showSelectedLabels: false,
+            elevation: 0,
+            backgroundColor: SolidColors.backgroundScreens,
+            currentIndex: _navigatorController.navItemIndexSelected.value,
             onTap: (value ) {
               _navigatorController.navItemIndexSelected.value = value;
               _navigatorController.changeNavItemIndex(_navigatorController.navItemIndexSelected.value);
-            },),
+            }, items: [
+                BottomNavigationBarItem(icon: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                            color: _navigatorController.navItemIndexSelected.value == 0
+                                ? SolidColors.primaryColor.withOpacity(0.3)
+                                : Colors.transparent,
+                            blurRadius: 12),
+                      ]),
+                  child: Icon(
+                    _navigatorController.navItemIndexSelected.value == 0
+                        ? Icons.home_rounded
+                        : Icons.home_outlined,
+                    size: 32,
+                    color: _navigatorController.navItemIndexSelected.value == 0
+                        ? SolidColors.primaryColor
+                        : Colors.grey.shade400,
+                  ),
+                ),label: 'home'),
+                BottomNavigationBarItem(icon: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                            color: _navigatorController.navItemIndexSelected.value == 1
+                                ? SolidColors.primaryColor.withOpacity(0.3)
+                                : Colors.transparent,
+                            blurRadius: 12),
+                      ]),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                              color: _navigatorController.navItemIndexSelected.value == 1
+                                  ? SolidColors.primaryColor.withOpacity(0.3)
+                                  : Colors.transparent,
+                              blurRadius: 8),
+                        ]),
+                    child: Icon(
+                      _navigatorController.navItemIndexSelected.value == 1
+                          ? CupertinoIcons.suit_heart_fill
+                          : CupertinoIcons.suit_heart,
+                      size: 32,
+                      color: _navigatorController.navItemIndexSelected.value == 1
+                          ? SolidColors.primaryColor
+                          : Colors.grey.shade400,
+                    ),
+                  ),
+                ),label: 'favourite'),
+                BottomNavigationBarItem(icon: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                            color: _navigatorController.navItemIndexSelected.value == 2
+                                ? SolidColors.primaryColor.withOpacity(0.3)
+                                : Colors.transparent,
+                            blurRadius: 12),
+                      ]),
+                  child: Icon(
+                    _navigatorController.navItemIndexSelected.value == 2 ? Icons.person : Icons.person_outline,
+                    size: 32,
+                    color: _navigatorController.navItemIndexSelected.value == 2
+                        ? SolidColors.primaryColor
+                        : Colors.grey.shade400,
+                  ),
+                ),label: 'profile'),
+                BottomNavigationBarItem(icon: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                            color: _navigatorController.navItemIndexSelected.value == 3
+                                ? SolidColors.primaryColor.withOpacity(0.3)
+                                : Colors.transparent,
+                            blurRadius: 12),
+                      ]),
+                  child: Icon(
+                    Icons.history,
+                    size: 32,
+                    color: _navigatorController.navItemIndexSelected.value == 3
+                        ? SolidColors.primaryColor
+                        : Colors.grey.shade400,
+                  ),
+                ),label: 'history'),
+          ],),
         ),
       );
   }

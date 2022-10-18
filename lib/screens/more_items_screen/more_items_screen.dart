@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:food_delivery/controllers/food_controller.dart';
 import 'package:food_delivery/controllers/search_controller.dart';
 import 'package:food_delivery/screens/home_screen/components/food_item.dart';
@@ -20,8 +21,7 @@ class _MoreItemsScreenState extends State<MoreItemsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    var bodyMargin = size.width * 0.07;
+    var bodyMargin = 12.0;
     return Obx(
         () =>
       Scaffold(
@@ -31,33 +31,51 @@ class _MoreItemsScreenState extends State<MoreItemsScreen> {
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black
-        ),
-        title: TextField(
-          style: Theme.of(context).textTheme.bodyText1,
-          controller: _searchController.searchBarController,
-          textInputAction: TextInputAction.search,
-          decoration: const InputDecoration(
-              filled: false,
-              hintText: 'Search',
-            isDense: false,
-            border: InputBorder.none,
+  PreferredSize buildAppBar(BuildContext context) {
+    return PreferredSize(
+      preferredSize: const Size(double.infinity, 84),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 20, 8, 0),
+        child: AppBar(
+            iconTheme: const IconThemeData(
+              color: Colors.black
+            ),
+            title: TextField(
+              style: Theme.of(context).textTheme.bodyText1,
+              controller: _searchController.searchBarController,
+              textInputAction: TextInputAction.search,
+              decoration: const InputDecoration(
+                  filled: false,
+                  hintText: 'Search',
+                isDense: false,
+                border: InputBorder.none,
+              ),
+              onChanged: (value ){
+                  _searchController.searchItemName = value;
+                  _searchController.searchItem(_searchController.searchItemName, Get.find<FoodController>().totalFooditems);
+              },
+              // onSubmitted: (String value) {
+              //
+              // },
+
+
+            ),
+            centerTitle: true,
+            leading: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: IconButton(
+                onPressed: (){
+                  FocusScope.of(context).unfocus();
+                  _searchController.searchBarController.clear();
+                  Get.back();
+                },
+                  icon: const Icon(Icons.arrow_back_ios)
+              ),
+            ),
+            leadingWidth: 80,
           ),
-          onChanged: (value ){
-              _searchController.searchItemName = value;
-              _searchController.searchItem(_searchController.searchItemName, Get.find<FoodController>().totalFooditems);
-          },
-          // onSubmitted: (String value) {
-          //
-          // },
-
-
-        ),
-        centerTitle: true,
-      );
+      ),
+    );
   }
 
   Widget buildBody(BuildContext context, double bodyMargin) {
@@ -68,9 +86,9 @@ class _MoreItemsScreenState extends State<MoreItemsScreen> {
       subTitle: '',
     ) : Container(
       height: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(30)
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30),)
       ),
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -86,20 +104,36 @@ class _MoreItemsScreenState extends State<MoreItemsScreen> {
     );
   }
   
-  GridView buildGridView(double bodyMargin) {
-    return GridView.count(
+  Widget buildGridView(double bodyMargin) {
+    return GridView.custom(
+        padding: EdgeInsets.symmetric(horizontal: bodyMargin,vertical: bodyMargin*2),
         shrinkWrap: true,
-        crossAxisCount: 2,
-        crossAxisSpacing: bodyMargin,
-        mainAxisSpacing: bodyMargin,
-        childAspectRatio: 1/1.6,
-        padding: EdgeInsets.all(bodyMargin),
         physics: const BouncingScrollPhysics(),
-        children: List.generate(_searchController.searchItemList.length, (index) =>
-            FoodItem(
-                item: _searchController.searchItemList[index],
-            )
-        ),
+        gridDelegate: SliverStairedGridDelegate(
+        //crossAxisCount: 2,
+        //crossAxisSpacing: 8,
+        //mainAxisSpacing: bodyMargin,
+        pattern: [
+          const StairedGridTile(0.5, 1/1.5),
+          const StairedGridTile(0.5, 1/1.7),
+        ],
+        //childAspectRatio: 1/1.7,
+
+      ),
+      childrenDelegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Column(
+            children: [
+              const Spacer(),
+              AspectRatio(aspectRatio: 1/1.5,child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+                child: FoodItem(item: _searchController.searchItemList[index],),
+              ),),
+            ],
+          );
+      },
+        childCount: _searchController.searchItemList.length,
+      ),
     );
   }
 }
