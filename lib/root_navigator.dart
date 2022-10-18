@@ -17,16 +17,22 @@ import 'package:food_delivery/screens/liked_screen/liked_screen.dart';
 import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
 import 'package:get/get.dart';
 
-import '../home_screen/components/bottom_nav_bar.dart';
-
-class RootScreen extends StatefulWidget {
-  const RootScreen({Key? key}) : super(key: key);
+class RootNavigator extends StatefulWidget {
+  const RootNavigator({Key? key}) : super(key: key);
 
   @override
-  _RootScreenState createState() => _RootScreenState();
+  _RootNavigatorState createState() => _RootNavigatorState();
 }
 
-class _RootScreenState extends State<RootScreen> {
+class _RootNavigatorState extends State<RootNavigator> {
+
+  final SystemUiOverlayStyle _systemUiOverlayStyle =  const SystemUiOverlayStyle(
+    statusBarColor: SolidColors.backgroundScreens,
+    statusBarIconBrightness: Brightness.dark,
+    systemNavigationBarColor: SolidColors.backgroundScreens,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    systemNavigationBarDividerColor: SolidColors.backgroundScreens,
+  );
 
   final _navigatorController = Get.find<NavigatorController>();
   final _drawerController = Get.find<MyDrawerController>();
@@ -76,24 +82,27 @@ class _RootScreenState extends State<RootScreen> {
     var size = MediaQuery.of(context).size;
     var bodyMargin = size.width * 0.07;
 
-    return SafeArea(
-      child: AdvancedDrawer(
-        backdropColor: SolidColors.primaryColor,
-        controller: _drawerController.advancedDrawerController,
-        animationCurve: Curves.easeInOut,
-        animationDuration: const Duration(milliseconds: 300),
-        animateChildDecoration: true,
-        rtlOpening: false,
-        openScale: 0.7,
-        openRatio: 1/2.2,
-        disabledGestures: false,
-        childDecoration: const BoxDecoration(
-          // NOTICE: Uncomment if you want to add shadow behind the page.
-          // Keep in mind that it may cause animation jerks.
-          borderRadius: BorderRadius.all(Radius.circular(30)),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: _systemUiOverlayStyle,
+      child: SafeArea(
+        child: AdvancedDrawer(
+          backdropColor: SolidColors.primaryColor,
+          controller: _drawerController.advancedDrawerController,
+          animationCurve: Curves.easeInOut,
+          animationDuration: const Duration(milliseconds: 300),
+          animateChildDecoration: true,
+          rtlOpening: false,
+          openScale: 0.7,
+          openRatio: 1/2.2,
+          disabledGestures: false,
+          childDecoration: const BoxDecoration(
+            // NOTICE: Uncomment if you want to add shadow behind the page.
+            // Keep in mind that it may cause animation jerks.
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+          ),
+          drawer: buildDrawer(),
+          child: buildScaffoldPage(bodyMargin, screens),
         ),
-        drawer: buildDrawer(),
-        child: buildScaffoldPage(bodyMargin, screens),
       ),
     );
   }
@@ -141,7 +150,7 @@ class _RootScreenState extends State<RootScreen> {
                     size: 32,
                     color: _navigatorController.navItemIndexSelected.value == 0
                         ? SolidColors.primaryColor
-                        : Colors.grey.shade400,
+                        : Colors.grey.shade500,
                   ),
                 ),label: 'home'),
                 BottomNavigationBarItem(icon: Container(
@@ -171,7 +180,7 @@ class _RootScreenState extends State<RootScreen> {
                       size: 32,
                       color: _navigatorController.navItemIndexSelected.value == 1
                           ? SolidColors.primaryColor
-                          : Colors.grey.shade400,
+                          : Colors.grey.shade500,
                     ),
                   ),
                 ),label: 'favourite'),
@@ -190,7 +199,7 @@ class _RootScreenState extends State<RootScreen> {
                     size: 32,
                     color: _navigatorController.navItemIndexSelected.value == 2
                         ? SolidColors.primaryColor
-                        : Colors.grey.shade400,
+                        : Colors.grey.shade500,
                   ),
                 ),label: 'profile'),
                 BottomNavigationBarItem(icon: Container(
@@ -208,7 +217,7 @@ class _RootScreenState extends State<RootScreen> {
                     size: 32,
                     color: _navigatorController.navItemIndexSelected.value == 3
                         ? SolidColors.primaryColor
-                        : Colors.grey.shade400,
+                        : Colors.grey.shade500,
                   ),
                 ),label: 'history'),
           ],),
