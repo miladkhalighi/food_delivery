@@ -1,7 +1,4 @@
 
-import 'package:flutter/material.dart';
-import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
-
 class DrawerModel {
   String title;
   String iconPath;

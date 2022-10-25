@@ -10,12 +10,14 @@ import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/drawer_controller.dart';
 import 'package:food_delivery/controllers/navigator_controller.dart';
 import 'package:food_delivery/models/drawer_model.dart';
-import 'package:food_delivery/screens/cart_screen/cart_screen.dart';
-import 'package:food_delivery/screens/history_screen/history_screen.dart';
-import 'package:food_delivery/screens/home_screen/home_screen.dart';
-import 'package:food_delivery/screens/liked_screen/liked_screen.dart';
-import 'package:food_delivery/screens/profile_screen/profile_screen.dart';
+import 'package:food_delivery/views/screens/cart_screen/cart_screen.dart';
 import 'package:get/get.dart';
+
+import 'controllers/search_controller.dart';
+import 'views/screens/history_screen/history_screen.dart';
+import 'views/screens/home_screen/home_screen.dart';
+import 'views/screens/liked_screen/liked_screen.dart';
+import 'views/screens/profile_screen/profile_screen.dart';
 
 class RootNavigator extends StatefulWidget {
   const RootNavigator({Key? key}) : super(key: key);
@@ -37,14 +39,14 @@ class _RootNavigatorState extends State<RootNavigator> {
   final _navigatorController = Get.find<NavigatorController>();
   final _drawerController = Get.find<MyDrawerController>();
 
-  List<Widget> screens = const [
+  List<Widget> bottomNavScreens = const [
     HomeScreen(),
     LikedScreen(),
     ProfileScreen(),
     HistoryScreen()
   ];
 
-  Widget buildAppBar(double bodyMargin) {
+  Widget appBar() {
 
     final _cartController = Get.find<CartController>();
 
@@ -59,6 +61,7 @@ class _RootNavigatorState extends State<RootNavigator> {
         ),
         Obx(
         ()=> Badge(
+          badgeColor: SolidColors.primaryColor,
           position: BadgePosition.topEnd(top: -5, end: -5),
           showBadge: _cartController.cartList.isNotEmpty,
           badgeContent: Text(_cartController.cartList.length.toString(),
@@ -66,9 +69,11 @@ class _RootNavigatorState extends State<RootNavigator> {
           child: IconButton(
               onPressed: () {
                 //Get.to(()=> const CartScreen());
+                FocusScope.of(context).unfocus();
+                Get.find<SearchController>().searchBarController.clear();
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const CartScreen()));
               },
-              icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24,),
+              icon: SvgPicture.asset('assets/icons/shopping-cart.svg',width: 24,height: 24),
             ),
         ),
         ),
@@ -78,9 +83,6 @@ class _RootNavigatorState extends State<RootNavigator> {
 
   @override
   Widget build(BuildContext context) {
-
-    var size = MediaQuery.of(context).size;
-    var bodyMargin = size.width * 0.07;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: _systemUiOverlayStyle,
@@ -101,17 +103,17 @@ class _RootNavigatorState extends State<RootNavigator> {
             borderRadius: BorderRadius.all(Radius.circular(30)),
           ),
           drawer: buildDrawer(),
-          child: buildScaffoldPage(bodyMargin, screens),
+          child: scaffoldPage(bottomNavScreens),
         ),
       ),
     );
   }
 
-  Scaffold buildScaffoldPage(double bodyMargin, List<Widget> screens) {
+  Scaffold scaffoldPage(List<Widget> screens) {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: buildAppBar(bodyMargin),
+          title: appBar(),
         ),
 
         body: Obx(
@@ -129,6 +131,9 @@ class _RootNavigatorState extends State<RootNavigator> {
             elevation: 0,
             backgroundColor: SolidColors.backgroundScreens,
             currentIndex: _navigatorController.navItemIndexSelected.value,
+            unselectedItemColor: Colors.grey.shade500,
+            selectedItemColor: SolidColors.primaryColor,
+            iconSize: 32,
             onTap: (value ) {
               _navigatorController.navItemIndexSelected.value = value;
               _navigatorController.changeNavItemIndex(_navigatorController.navItemIndexSelected.value);
@@ -147,10 +152,6 @@ class _RootNavigatorState extends State<RootNavigator> {
                     _navigatorController.navItemIndexSelected.value == 0
                         ? Icons.home_rounded
                         : Icons.home_outlined,
-                    size: 32,
-                    color: _navigatorController.navItemIndexSelected.value == 0
-                        ? SolidColors.primaryColor
-                        : Colors.grey.shade500,
                   ),
                 ),label: 'home'),
                 BottomNavigationBarItem(icon: Container(
@@ -177,10 +178,6 @@ class _RootNavigatorState extends State<RootNavigator> {
                       _navigatorController.navItemIndexSelected.value == 1
                           ? CupertinoIcons.suit_heart_fill
                           : CupertinoIcons.suit_heart,
-                      size: 32,
-                      color: _navigatorController.navItemIndexSelected.value == 1
-                          ? SolidColors.primaryColor
-                          : Colors.grey.shade500,
                     ),
                   ),
                 ),label: 'favourite'),
@@ -196,10 +193,6 @@ class _RootNavigatorState extends State<RootNavigator> {
                       ]),
                   child: Icon(
                     _navigatorController.navItemIndexSelected.value == 2 ? Icons.person : Icons.person_outline,
-                    size: 32,
-                    color: _navigatorController.navItemIndexSelected.value == 2
-                        ? SolidColors.primaryColor
-                        : Colors.grey.shade500,
                   ),
                 ),label: 'profile'),
                 BottomNavigationBarItem(icon: Container(
@@ -212,12 +205,8 @@ class _RootNavigatorState extends State<RootNavigator> {
                                 : Colors.transparent,
                             blurRadius: 12),
                       ]),
-                  child: Icon(
+                  child: const Icon(
                     Icons.history,
-                    size: 32,
-                    color: _navigatorController.navItemIndexSelected.value == 3
-                        ? SolidColors.primaryColor
-                        : Colors.grey.shade500,
                   ),
                 ),label: 'history'),
           ],),

@@ -1,16 +1,17 @@
 
-import 'package:flutter/material.dart';
-import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/constants/constanst.dart';
+import 'package:food_delivery/constants/constants.dart';
 import 'package:get/get.dart';
 
-import '../models/item.dart';
+import '../models/item_model.dart';
 
 class CartController extends GetxController{
 
-  var cartList = [].obs;
+  var cartList = [itemsList[0],itemsList[1]].obs;
 
-  void addToCart(Item item){
+  void addToCart(ItemModel item){
+    if(Get.isSnackbarOpen){
+      Get.closeCurrentSnackbar();
+    }
     if(cartList.contains(item)){
       //already added
       customSnackBar('Add to cart', 'this item has already added to cart');
@@ -24,29 +25,35 @@ class CartController extends GetxController{
 
   }
 
-  void removeFromCart(Item item){
+  void removeFromCart(ItemModel item){
     cartList.remove(item);
     customSnackBar('Item removed', '${item.name} removed from cart');
     //update(['updateCartList']);
   }
 
 
-  quantityIncrement(Item item){
+  quantityIncrement(ItemModel item){
     if(item.quantity <9){
       item.quantity += 1;
       update(['quantity']);
     }else{
+      if(Get.isSnackbarOpen){
+        Get.closeCurrentSnackbar();
+      }
       customSnackBar('Wrong quantity', 'quantity can not be upper than 9');
     }
 
   }
 
-  quantityDecrement(Item item){
+  quantityDecrement(ItemModel item){
     if(item.quantity > 1){
       item.quantity -= 1;
       update(['quantity']);
     }
     else{
+      if(Get.isSnackbarOpen){
+        Get.closeCurrentSnackbar();
+      }
       customSnackBar('Wrong quantity', 'quantity can not be lower than 1');
     }
 
