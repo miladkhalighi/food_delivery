@@ -19,70 +19,68 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: buildAppBar(context),
-        body: body(context),
-      ),
+    return Scaffold(
+      appBar: buildAppBar(context),
+      body: body(context),
     );
   }
 
   Column body(BuildContext context) {
     return Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/touch_swipe.svg',
-                width: 24,
-                height: 24,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Text(
-                'swipe on an item to delete',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    ?.copyWith(color: Colors.black),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: Dimension.bodyMargin,
-          ),
-          Expanded(
-              child: Obx(() => _cartController.cartList.isNotEmpty
-                  ? ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: _cartController.cartList.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: Dimension.bodyMargin/2),
-                          child:
-                              ItemCart(item: _cartController.cartList[index]),
-                        );
-                      })
-                  : buildEmptyCartList())),
-          //button
-          Obx(() => _cartController.cartList.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: Dimension.bodyMargin),
-                  child: SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Complete order'))),
-                )
-              : const SizedBox.shrink()),
-          const SizedBox(
-            height: Dimension.bodyMargin,
-          ),
-        ],
-      );
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              'assets/icons/touch_swipe.svg',
+              width: 24,
+              height: 24,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Text(
+              'swipe on an item to delete',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  ?.copyWith(color: Colors.black),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: Dimension.bodyMargin,
+        ),
+        Expanded(
+            child: Obx(() => _cartController.cartList.isNotEmpty
+                ? ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: _cartController.cartList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: Dimension.bodyMargin / 2),
+                        child: ItemCart(item: _cartController.cartList[index]),
+                      );
+                    })
+                : buildEmptyCartList())),
+        //button
+        Obx(() => _cartController.cartList.isNotEmpty
+            ? Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: Dimension.bodyMargin),
+                child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () {}, child: const Text('Complete order'))),
+              )
+            : const SizedBox.shrink()),
+        const SizedBox(
+          height: Dimension.bodyMargin,
+        ),
+      ],
+    );
   }
 
   Stack buildEmptyCartList() {
@@ -126,5 +124,3 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 }
-
-
