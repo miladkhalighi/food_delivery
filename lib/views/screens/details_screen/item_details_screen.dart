@@ -18,7 +18,7 @@ class ItemDetailsScreen extends StatelessWidget {
     var bodyMargin = size.width * 0.07;
 
     return Scaffold(
-      backgroundColor: SolidColors.backgroundScreens,
+      backgroundColor: AppColors.backgroundScreens,
       appBar: buildAppBar(bodyMargin, context),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: bodyMargin),
@@ -74,7 +74,7 @@ class ItemDetailsScreen extends StatelessWidget {
                               .bodyText1
                               ?.copyWith(
                                   fontSize: 20,
-                                  color: SolidColors.primaryColor))),
+                                  color: AppColors.primaryColor))),
                   const SizedBox(
                     height: 32,
                   ),
@@ -133,8 +133,8 @@ class ItemDetailsScreen extends StatelessWidget {
                     'Add to cart',
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: SolidColors.primaryColor,
-                      onPrimary: SolidColors.buttonTextColorSecondary),
+                      primary: AppColors.primaryColor,
+                      onPrimary: AppColors.buttonTextColorSecondary),
                 ),
               ),
             ),

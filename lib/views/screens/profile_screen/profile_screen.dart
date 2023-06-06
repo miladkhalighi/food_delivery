@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
@@ -17,9 +16,9 @@ class ProfileScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: SolidColors.backgroundScreens,
+        backgroundColor: AppColors.backgroundScreens,
         appBar: AppBar(
-          backgroundColor: SolidColors.backgroundScreens,
+          backgroundColor: AppColors.backgroundScreens,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: bodyMargin),
@@ -51,22 +50,43 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(
                     height: 32,
                   ),
-                  ProfileListTile(title: 'Orders', onTap: () {  },),
-                  const SizedBox(height: 32,),
-                  ProfileListTile(title: 'Pending reviews', onTap: () {  },),
-                  const SizedBox(height: 32,),
-                  ProfileListTile(title: 'Faq', onTap: () {  },),
-                  const SizedBox(height: 32,),
-                  ProfileListTile(title: 'Help', onTap: () {  },),
-
-
+                  ProfileListTile(
+                    title: 'Orders',
+                    onTap: () {},
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  ProfileListTile(
+                    title: 'Pending reviews',
+                    onTap: () {},
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  ProfileListTile(
+                    title: 'Faq',
+                    onTap: () {},
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  ProfileListTile(
+                    title: 'Help',
+                    onTap: () {},
+                  ),
                 ],
               ),
-              const SizedBox(height: 64,),
+              const SizedBox(
+                height: 64,
+              ),
               SizedBox(
                   height: 64,
-                  child: ElevatedButton(onPressed: (){}, child: const Text('Update'))),
-              const SizedBox(height: 16,),
+                  child: ElevatedButton(
+                      onPressed: () {}, child: const Text('Update'))),
+              const SizedBox(
+                height: 16,
+              ),
             ],
           ),
         ),
@@ -91,7 +111,7 @@ class ProfileScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
               child: Container(
-                color: SolidColors.primaryColor,
+                color: AppColors.primaryColor,
                 child: const Image(
                   fit: BoxFit.cover,
                   image: AssetImage(
@@ -147,7 +167,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-

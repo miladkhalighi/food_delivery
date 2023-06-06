@@ -27,11 +27,11 @@ class RootNavigator extends StatefulWidget {
 
 class _RootNavigatorState extends State<RootNavigator> {
   final SystemUiOverlayStyle _systemUiOverlayStyle = const SystemUiOverlayStyle(
-    statusBarColor: SolidColors.backgroundScreens,
+    statusBarColor: AppColors.backgroundScreens,
     statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: SolidColors.backgroundScreens,
+    systemNavigationBarColor: AppColors.backgroundScreens,
     systemNavigationBarIconBrightness: Brightness.dark,
-    systemNavigationBarDividerColor: SolidColors.backgroundScreens,
+    systemNavigationBarDividerColor: AppColors.backgroundScreens,
   );
 
   final _navigatorController = Get.find<NavigatorController>();
@@ -62,7 +62,7 @@ class _RootNavigatorState extends State<RootNavigator> {
         ),
         Obx(
           () => badges.Badge(
-            badgeColor: SolidColors.primaryColor,
+            badgeColor: AppColors.primaryColor,
             position: badges.BadgePosition.topEnd(top: -5, end: -5),
             showBadge: _cartController.cartList.isNotEmpty,
             badgeContent: Text(
@@ -91,7 +91,7 @@ class _RootNavigatorState extends State<RootNavigator> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: _systemUiOverlayStyle,
       child: AdvancedDrawer(
-        backdropColor: SolidColors.primaryColor,
+        backdropColor: AppColors.primaryColor,
         controller: _drawerController.advancedDrawerController,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 300),
@@ -129,10 +129,10 @@ class _RootNavigatorState extends State<RootNavigator> {
           showUnselectedLabels: false,
           showSelectedLabels: false,
           elevation: 0,
-          backgroundColor: SolidColors.backgroundScreens,
+          backgroundColor: AppColors.backgroundScreens,
           currentIndex: _navigatorController.navItemIndexSelected.value,
           unselectedItemColor: Colors.grey.shade500,
-          selectedItemColor: SolidColors.primaryColor,
+          selectedItemColor: AppColors.primaryColor,
           iconSize: 32,
           onTap: (value) {
             _navigatorController.navItemIndexSelected.value = value;
@@ -149,7 +149,7 @@ class _RootNavigatorState extends State<RootNavigator> {
                             color: _navigatorController
                                         .navItemIndexSelected.value ==
                                     0
-                                ? SolidColors.primaryColor.withOpacity(0.3)
+                                ? AppColors.primaryColor.withOpacity(0.3)
                                 : Colors.transparent,
                             blurRadius: 12),
                       ]),
@@ -169,7 +169,7 @@ class _RootNavigatorState extends State<RootNavigator> {
                             color: _navigatorController
                                         .navItemIndexSelected.value ==
                                     1
-                                ? SolidColors.primaryColor.withOpacity(0.3)
+                                ? AppColors.primaryColor.withOpacity(0.3)
                                 : Colors.transparent,
                             blurRadius: 12),
                       ]),
@@ -181,7 +181,7 @@ class _RootNavigatorState extends State<RootNavigator> {
                               color: _navigatorController
                                           .navItemIndexSelected.value ==
                                       1
-                                  ? SolidColors.primaryColor.withOpacity(0.3)
+                                  ? AppColors.primaryColor.withOpacity(0.3)
                                   : Colors.transparent,
                               blurRadius: 8),
                         ]),
@@ -202,7 +202,7 @@ class _RootNavigatorState extends State<RootNavigator> {
                             color: _navigatorController
                                         .navItemIndexSelected.value ==
                                     2
-                                ? SolidColors.primaryColor.withOpacity(0.3)
+                                ? AppColors.primaryColor.withOpacity(0.3)
                                 : Colors.transparent,
                             blurRadius: 12),
                       ]),
@@ -222,7 +222,7 @@ class _RootNavigatorState extends State<RootNavigator> {
                             color: _navigatorController
                                         .navItemIndexSelected.value ==
                                     3
-                                ? SolidColors.primaryColor.withOpacity(0.3)
+                                ? AppColors.primaryColor.withOpacity(0.3)
                                 : Colors.transparent,
                             blurRadius: 12),
                       ]),
@@ -240,7 +240,7 @@ class _RootNavigatorState extends State<RootNavigator> {
   Widget buildDrawer() {
     return Drawer(
       elevation: 0,
-      backgroundColor: SolidColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       child: Column(
         children: [
           SizedBox(

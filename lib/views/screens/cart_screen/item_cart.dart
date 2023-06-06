@@ -43,13 +43,13 @@ class ItemCart extends StatelessWidget {
                         },
                         icon: _likedController.getStatus(item)
                             ? const Icon(
-                          CupertinoIcons.heart_fill,
-                          color: Colors.white,
-                        )
+                                CupertinoIcons.heart_fill,
+                                color: Colors.white,
+                              )
                             : const Icon(
-                          CupertinoIcons.heart,
-                          color: Colors.white,
-                        ),
+                                CupertinoIcons.heart,
+                                color: Colors.white,
+                              ),
                       ),
                     ),
                     backgroundColor: const Color(0xFFDF2C2C),
@@ -100,8 +100,8 @@ class ItemCart extends StatelessWidget {
                       height: 70,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          image: DecorationImage(image: AssetImage(item.img),fit: BoxFit.cover)
-                      ),
+                          image: DecorationImage(
+                              image: AssetImage(item.img), fit: BoxFit.cover)),
                     ),
                   ),
                 ),
@@ -135,12 +135,12 @@ class ItemCart extends StatelessWidget {
                                 .textTheme
                                 .bodyText1
                                 ?.copyWith(
-                                fontSize: 16,
-                                color: SolidColors.primaryColor),
+                                    fontSize: 16,
+                                    color: AppColors.primaryColor),
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: SolidColors.primaryColor,
+                                color: AppColors.primaryColor,
                                 borderRadius: BorderRadius.circular(1000)),
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
@@ -153,7 +153,7 @@ class ItemCart extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                         splashColor:
-                                        Colors.white.withOpacity(0.5),
+                                            Colors.white.withOpacity(0.5),
                                         onTap: () {
                                           _cartController
                                               .quantityDecrement(item);
@@ -179,7 +179,7 @@ class ItemCart extends StatelessWidget {
                                                 .textTheme
                                                 .bodyText1
                                                 ?.copyWith(
-                                                color: Colors.white)),
+                                                    color: Colors.white)),
                                       );
                                     },
                                   ),
@@ -187,7 +187,7 @@ class ItemCart extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                         splashColor:
-                                        Colors.white.withOpacity(0.5),
+                                            Colors.white.withOpacity(0.5),
                                         onTap: () {
                                           _cartController
                                               .quantityIncrement(item);

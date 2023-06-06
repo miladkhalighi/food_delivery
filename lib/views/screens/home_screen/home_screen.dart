@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var _homeController = Get.find<HomeScreenController>();
 
     return Scaffold(
-      backgroundColor: SolidColors.backgroundScreens,
+      backgroundColor: AppColors.backgroundScreens,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -153,15 +153,15 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.search,
               color: Colors.black,
             ),
-            fillColor: SolidColors.textFieldInside,
+            fillColor: AppColors.textFieldInside,
             filled: true,
             hintText: 'Search',
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(1000)),
-                borderSide: BorderSide(color: SolidColors.textFieldInside)),
+                borderSide: BorderSide(color: AppColors.textFieldInside)),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(1000)),
-                borderSide: BorderSide(color: SolidColors.textFieldInside))),
+                borderSide: BorderSide(color: AppColors.textFieldInside))),
         onChanged: (value) {
           _searchController.searchItemName.value = value;
         },
