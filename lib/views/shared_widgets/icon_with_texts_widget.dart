@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/res/dimentions.dart';
 
-import '../../constants/colors.dart';
+import '../../res/colors.dart';
 
 class IconWithTextsWidget extends StatelessWidget {
   final IconData? icon;
@@ -15,6 +16,7 @@ class IconWithTextsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return Container(
       color: AppColors.backgroundScreens,
       child: Column(
@@ -25,32 +27,33 @@ class IconWithTextsWidget extends StatelessWidget {
               ? Icon(
                   icon,
                   color: const Color(0xFFC7C7C7),
-                  size: 150,
+                  size: MediaQuery.of(context).size.height * 0.2,
                 )
               : const SizedBox(),
-          const SizedBox(
-            height: 32,
+          SizedBox(
+            height: AppDimens.bodyMarginLarge,
           ),
           Text(
             title,
-            style: Theme.of(context).textTheme.headline3,
+            style: textTheme
+                .headlineMedium
+                ?.copyWith(color: Colors.grey),
           ),
-          const SizedBox(
-            height: 16,
+          SizedBox(
+            height: AppDimens.bodyMarginLarge,
           ),
           Center(
             child: Text(
               subTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
+              style: textTheme
+                  .bodyLarge
                   ?.copyWith(color: Colors.grey),
               maxLines: 2,
-              softWrap: true,
+              textAlign: TextAlign.center,
             ),
           ),
-          const SizedBox(
-            height: 32,
+          SizedBox(
+            height: AppDimens.bodyMarginLarge,
           ),
         ],
       ),

@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'colors.dart';
-
-class Dimension {
-  static final size = Get.size;
-  static const bodyMargin = 20.0;
-}
+import 'package:food_delivery/res/colors.dart';
 
 void customSnackBar(String title, String msg) {
   Get.snackbar(title, msg,

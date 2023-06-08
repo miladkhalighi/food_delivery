@@ -1,17 +1,18 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/res/dimentions.dart';
 import 'package:food_delivery/views/screens/details_screen/item_details_screen.dart';
 
-import '../../constants/colors.dart';
+import '../../res/colors.dart';
 import '../../models/item_model.dart';
+import '../screens/details_screen/item_details_screen.dart';
 
 class FoodItem extends StatefulWidget {
-  final double width;
   final ItemModel item;
   final bool showHero;
 
   const FoodItem({
     Key? key,
-    this.width = 150,
     required this.item,
     this.showHero = true,
   }) : super(key: key);
@@ -48,101 +49,104 @@ class _FoodItemState extends State<FoodItem>
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
+    var size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         //Get.to(()=> ItemDetailsScreen(item: item));
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ItemDetailsScreen(item: widget.item)));
       },
-      child: SizedBox(
-          width: widget.width,
-          height: widget.width * 1.55,
-          child: Stack(
-            children: [
-              Positioned(
-                top: widget.width / 4,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  height: widget.width * 2 / 1.5,
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0, 0),
-                            blurRadius: 16)
-                      ]),
-                  child: ScaleTransition(
-                    scale: _fadeAndScale,
-                    child: FadeTransition(
-                      opacity: _fadeAndScale,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            widget.item.name,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1
-                                ?.copyWith(fontSize: 22),
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(
-                            height: widget.width * 0.1,
-                          ),
-                          Text(
-                            widget.item.price,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1
-                                ?.copyWith(
-                                    fontSize: 18,
-                                    color: AppColors.primaryColor),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(
-                            height: widget.width * 0.15,
-                          )
+      child: Stack(
+        children: [
+          //bg container
+          Positioned.fill(
+            top: size.height * 0.05,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              //height: widget.width * 2 / 1.5,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(size.width < 400 ? 30 : 50)),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0, 0),
+                        blurRadius: 16)
+                  ]),
+              child: ScaleTransition(
+                scale: _fadeAndScale,
+                child: FadeTransition(
+                  opacity: _fadeAndScale,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      AutoSizeText(
+                        widget.item.name,
+                        style: textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        presetFontSizes: [
+                          textTheme.bodyLarge?.fontSize ?? 34,
+                          textTheme.bodyMedium?.fontSize ?? 22,
+                          textTheme.bodySmall?.fontSize ?? 16
                         ],
                       ),
-                    ),
+                      SizedBox(
+                        height: AppDimens.bodyMarginMedium,
+                      ),
+                      AutoSizeText(
+                        widget.item.price,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontSize: 18, color: AppColors.primaryColor),
+                        overflow: TextOverflow.ellipsis,
+                        minFontSize: 10,
+                        stepGranularity: 10,
+                      ),
+                      SizedBox(
+                        height: AppDimens.bodyMarginMedium,
+                      )
+                    ],
                   ),
                 ),
               ),
-              //image
-              Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: Hero(
-                    tag: widget.showHero ? widget.item.id : UniqueKey(),
-                    child: RotationTransition(
-                      turns: _rotate,
-                      child: Container(
-                        width: widget.width - widget.width * 0.15,
-                        height: widget.width - widget.width * 0.15,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: AssetImage(widget.item.img),
-                                fit: BoxFit.contain),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(1),
-                                  blurRadius: 16,
-                                  offset: const Offset(0, 0))
-                            ]),
-                      ),
+            ),
+          ),
+          //image
+          Positioned(
+              top: 0,
+              left: AppDimens.bodyMarginSmall,
+              right: AppDimens.bodyMarginSmall,
+              child: Hero(
+                tag: widget.showHero ? widget.item.id : UniqueKey(),
+                child: RotationTransition(
+                  turns: _rotate,
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: AssetImage(widget.item.img),
+                              fit: BoxFit.contain),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(1),
+                                blurRadius: 16,
+                                offset: const Offset(0, 0))
+                          ]),
                     ),
-                  ))
-            ],
-          )),
+                  ),
+                ),
+              ))
+        ],
+      ),
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/res/colors.dart';
 
 import 'components/profile_listtile.dart';
 import 'components/title_with_textbutton.dart';

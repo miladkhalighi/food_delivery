@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/res/colors.dart';
 
 class CategoryItem extends StatelessWidget {
   final String name;

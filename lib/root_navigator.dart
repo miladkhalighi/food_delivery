@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/res/colors.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/drawer_controller.dart';
 import 'package:food_delivery/controllers/navigator_controller.dart';
 import 'package:food_delivery/models/drawer_model.dart';
+import 'package:food_delivery/res/dimentions.dart';
 import 'package:food_delivery/views/screens/cart_screen/cart_screen.dart';
 import 'package:get/get.dart';
 
@@ -26,13 +27,13 @@ class RootNavigator extends StatefulWidget {
 }
 
 class _RootNavigatorState extends State<RootNavigator> {
-  final SystemUiOverlayStyle _systemUiOverlayStyle = const SystemUiOverlayStyle(
-    statusBarColor: AppColors.backgroundScreens,
-    statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: AppColors.backgroundScreens,
-    systemNavigationBarIconBrightness: Brightness.dark,
-    systemNavigationBarDividerColor: AppColors.backgroundScreens,
-  );
+  // final SystemUiOverlayStyle _systemUiOverlayStyle = const SystemUiOverlayStyle(
+  //   statusBarColor: AppColors.backgroundScreens,
+  //   statusBarIconBrightness: Brightness.dark,
+  //   systemNavigationBarColor: AppColors.backgroundScreens,
+  //   systemNavigationBarIconBrightness: Brightness.dark,
+  //   systemNavigationBarDividerColor: AppColors.backgroundScreens,
+  // );
 
   final _navigatorController = Get.find<NavigatorController>();
   final _drawerController = Get.find<MyDrawerController>();
@@ -88,26 +89,23 @@ class _RootNavigatorState extends State<RootNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: _systemUiOverlayStyle,
-      child: AdvancedDrawer(
-        backdropColor: AppColors.primaryColor,
-        controller: _drawerController.advancedDrawerController,
-        animationCurve: Curves.easeInOut,
-        animationDuration: const Duration(milliseconds: 300),
-        animateChildDecoration: true,
-        rtlOpening: false,
-        openScale: 0.7,
-        openRatio: 1 / 2.2,
-        disabledGestures: false,
-        childDecoration: const BoxDecoration(
-          // NOTICE: Uncomment if you want to add shadow behind the page.
-          // Keep in mind that it may cause animation jerks.
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-        ),
-        drawer: buildDrawer(),
-        child: scaffoldPage(bottomNavScreens),
+    return AdvancedDrawer(
+      backdropColor: AppColors.primaryColor,
+      controller: _drawerController.advancedDrawerController,
+      animationCurve: Curves.easeInOut,
+      animationDuration: const Duration(milliseconds: 300),
+      animateChildDecoration: true,
+      rtlOpening: false,
+      openScale: 0.7,
+      openRatio: 1 / 2.2,
+      disabledGestures: false,
+      childDecoration: const BoxDecoration(
+        // NOTICE: Uncomment if you want to add shadow behind the page.
+        // Keep in mind that it may cause animation jerks.
+        borderRadius: BorderRadius.all(Radius.circular(30)),
       ),
+      drawer: buildDrawer(),
+      child: scaffoldPage(bottomNavScreens),
     );
   }
 
@@ -242,82 +240,85 @@ class _RootNavigatorState extends State<RootNavigator> {
       elevation: 0,
       backgroundColor: AppColors.primaryColor,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             height: Get.height * 0.1,
           ),
-          ListView.separated(
-            itemCount: drawerList.length - 1,
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                  onTap: () {
-                    _drawerController.changeDrawerItemIndex(index);
-                    switch (_drawerController.drawerItemIndex.value) {
-                      case 0:
-                        _navigatorController.changeNavItemIndex(2);
-                        _drawerController.advancedDrawerController.hideDrawer();
-                        //Get.to(()=> const ProfileScreen());
-                        break;
-
-                      case 1:
-                        _drawerController.advancedDrawerController.hideDrawer();
-                        Get.to(() => const CartScreen());
-                        break;
-
-                      case 2:
-                        break;
-
-                      case 3:
-                        break;
-
-                      case 4:
-                        break;
-
-                      case 5:
-                        break;
-                    }
-                  },
-                  horizontalTitleGap: 0,
-                  title: Text(
-                    drawerList[index].title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(color: Colors.white),
-                  ),
-                  leading: SvgPicture.asset(
-                    drawerList[index].iconPath,
-                    color: Colors.white,
-                  ));
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return Divider(
-                color: Colors.white.withOpacity(0.3),
-                thickness: 2,
-                indent: 60,
-              );
-            },
+          Expanded(
+            child: ListView.separated(
+              itemCount: drawerList.length - 1,
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                    onTap: () {
+                      _drawerController.changeDrawerItemIndex(index);
+                      switch (_drawerController.drawerItemIndex.value) {
+                        case 0:
+                          _navigatorController.changeNavItemIndex(2);
+                          _drawerController.advancedDrawerController.hideDrawer();
+                          //Get.to(()=> const ProfileScreen());
+                          break;
+                
+                        case 1:
+                          _drawerController.advancedDrawerController.hideDrawer();
+                          Get.to(() => const CartScreen());
+                          break;
+                
+                        case 2:
+                          break;
+                
+                        case 3:
+                          break;
+                
+                        case 4:
+                          break;
+                
+                        case 5:
+                          break;
+                      }
+                    },
+                    horizontalTitleGap: 0,
+                    title: Text(
+                      drawerList[index].title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          ?.copyWith(color: Colors.white),
+                    ),
+                    leading: SvgPicture.asset(
+                      drawerList[index].iconPath,
+                      color: Colors.white,
+                    ));
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Divider(
+                  color: Colors.white.withOpacity(0.3),
+                  thickness: 2,
+                  indent: 60,
+                );
+              },
+            ),
           ),
-          const Spacer(),
+          SizedBox(height: AppDimens.bodyMarginLarge,),
           InkWell(
             onTap: () {
               _drawerController.changeDrawerItemIndex(drawerList.length);
             },
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(AppDimens.bodyMarginLarge),
               child: Row(
                 children: [
                   Text(
                     drawerList.last.title,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1
+                        .bodyMedium
                         ?.copyWith(color: Colors.white),
                   ),
-                  const SizedBox(
-                    width: 8,
+                  SizedBox(
+                    width: AppDimens.bodyMarginSmall,
                   ),
                   SvgPicture.asset(
                     drawerList.last.iconPath,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/res/colors.dart';
 import 'package:food_delivery/res/style.dart';
 import 'package:food_delivery/root_navigator.dart';
 import 'package:food_delivery/res/dimentions.dart';
@@ -102,7 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   Widget avatars() {
     return SizedBox(
       width: double.infinity,
-      height: Dimension.size.height / 1.9,
+      height: MediaQuery.of(context).size.height / 1.9,
       child: Stack(
         children: const [
           Positioned(

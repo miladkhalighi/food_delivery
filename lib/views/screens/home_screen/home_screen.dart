@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/constants/constants.dart';
+import 'package:food_delivery/res/colors.dart';
 import 'package:food_delivery/controllers/home_screen_controller.dart';
 import 'package:food_delivery/controllers/search_controller.dart';
-import 'package:food_delivery/models/item_model.dart';
+import 'package:food_delivery/res/dimentions.dart';
 import 'package:food_delivery/views/screens/more_items_screen/more_items_screen.dart';
 import 'package:food_delivery/views/shared_widgets/food_item.dart';
 import 'package:get/get.dart';
@@ -25,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var _homeController = Get.find<HomeScreenController>();
+    var size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundScreens,
@@ -33,11 +33,18 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            headerText(),
-            searchBar(),
-            categoriesWidget(_homeController),
-            seeMoreBtn(),
-            gridItemsView(_homeController),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                headerText(),
+                searchBar(),
+                categoriesWidget(_homeController),
+                //SizedBox(height: size.height*0.04,),
+                seeMoreBtn(),
+              ],
+            ),
+            //SizedBox(height: (size.height * 0.3)+(size.width*0.1) ,child: gridItemsView(_homeController)),
+            SizedBox(height: (size.height * 0.3)+(size.width*0.14) ,child: gridItemsView(_homeController)),
           ],
         ),
       ),
@@ -45,35 +52,33 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget gridItemsView(HomeScreenController _homeController) {
-    return SizedBox(
-      width: double.infinity,
-      height: Dimension.size.height / 2.8,
-      child: Obx(
-        () => ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: _homeController.items.length,
-            itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      index == 0 ? Dimension.bodyMargin : 16,
-                      16,
-                      index == _homeController.items.length - 1
-                          ? Dimension.bodyMargin
-                          : 16,
-                      16),
-                  child: FoodItem(
-                      width: Dimension.size.width / 2.5,
-                      item: _homeController.items[index]),
-                )),
-      ),
+    return Obx(
+      () => GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            childAspectRatio: 1.5),
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemCount: _homeController.items.length,
+          itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.fromLTRB(
+                    index == 0 ? AppDimens.bodyMarginLarge : AppDimens.bodyMarginMedium,
+                    AppDimens.bodyMarginMedium,
+                    index == _homeController.items.length - 1
+                        ? AppDimens.bodyMarginLarge
+                        : AppDimens.bodyMarginMedium,
+                    AppDimens.bodyMarginMedium),
+                child: FoodItem(
+                    item: _homeController.items[index]),
+              )),
     );
   }
 
   Widget seeMoreBtn() {
     var _searchController = Get.find<SearchController>();
     return Padding(
-      padding: const EdgeInsets.only(right: Dimension.bodyMargin),
+      padding: EdgeInsets.only(right: AppDimens.bodyMarginLarge),
       child: Align(
           alignment: Alignment.centerRight,
           child: TextButton(
@@ -89,15 +94,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 'see more',
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText2
+                    .bodyMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ))),
     );
   }
 
   Widget categoriesWidget(HomeScreenController _homeController) {
+    var size = MediaQuery.of(context).size;
     return SizedBox(
-      height: Dimension.size.height * 0.07,
+      height: size.height * 0.05 + size.width* 0.05,
       child: ListView.builder(
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
@@ -106,11 +112,11 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.fromLTRB(
-                  index == 0 ? Dimension.bodyMargin : 8,
+                  index == 0 ? AppDimens.bodyMarginLarge : AppDimens.bodyMarginSmall,
                   8,
                   index == _homeController.categories.length - 1
-                      ? Dimension.bodyMargin
-                      : 8,
+                      ? AppDimens.bodyMarginLarge
+                      : AppDimens.bodyMarginSmall,
                   8),
               child: Obx(
                 () => CategoryItem(
@@ -131,11 +137,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget headerText() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-          Dimension.bodyMargin, 16, Dimension.bodyMargin, 0),
+      padding: EdgeInsets.fromLTRB(
+          AppDimens.bodyMarginLarge, AppDimens.bodyMarginMedium, AppDimens.bodyMarginLarge, 0),
       child: Text(
-        'Delicious \nfood for you',
-        style: Theme.of(context).textTheme.headline2,
+        'Delicious food for you',
+        maxLines: 2,
+        style: Theme.of(context).textTheme.headlineMedium,
       ),
     );
   }
@@ -143,8 +150,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget searchBar() {
     var _searchController = Get.find<SearchController>();
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: Dimension.bodyMargin, vertical: Dimension.bodyMargin * 2),
+      padding: EdgeInsets.symmetric(
+          horizontal: AppDimens.bodyMarginLarge, vertical: AppDimens.bodyMarginLarge * 2),
       child: TextField(
         controller: _searchController.searchBarController,
         textInputAction: TextInputAction.search,

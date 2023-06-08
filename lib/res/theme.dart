@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/res/style.dart';
 
-import '../constants/colors.dart';
+import 'colors.dart';
 
 class AppTheme {
   AppTheme._();
@@ -25,7 +25,7 @@ class AppTheme {
           headlineLarge: const TextStyle(
               fontSize: 64, fontWeight: FontWeight.bold, color: Colors.white),
           headlineMedium: const TextStyle(
-              fontSize: 40, fontWeight: FontWeight.bold, color: Colors.black),
+              fontSize: 34, fontWeight: FontWeight.bold, color: Colors.black),
           headlineSmall: const TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
           bodyLarge: TextStyle(
