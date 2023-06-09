@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/res/colors.dart';
 import 'package:food_delivery/controllers/home_screen_controller.dart';
-import 'package:food_delivery/controllers/search_controller.dart';
 import 'package:food_delivery/res/dimentions.dart';
 import 'package:food_delivery/views/screens/more_items_screen/more_items_screen.dart';
 import 'package:food_delivery/views/shared_widgets/food_item.dart';
 import 'package:get/get.dart';
+import '../../../controllers/my_search_controller.dart';
 import 'category_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget seeMoreBtn() {
-    var _searchController = Get.find<SearchController>();
+    var _searchController = Get.find<MySearchController>();
     return Padding(
       padding: EdgeInsets.only(right: AppDimens.bodyMarginLarge),
       child: Align(
@@ -148,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget searchBar() {
-    var _searchController = Get.find<SearchController>();
+    var _searchController = Get.find<MySearchController>();
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: AppDimens.bodyMarginLarge, vertical: AppDimens.bodyMarginLarge * 2),

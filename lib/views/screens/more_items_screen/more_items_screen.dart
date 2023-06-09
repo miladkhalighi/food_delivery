@@ -1,8 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery/views/shared_widgets/icon_with_texts_widget.dart';
-import 'package:food_delivery/controllers/search_controller.dart';
-import 'package:food_delivery/models/item_model.dart';
+import 'package:food_delivery/controllers/my_search_controller.dart';
 import 'package:food_delivery/views/shared_widgets/custom_grid_view_with_title.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,7 @@ class MoreItemsScreen extends StatefulWidget {
 
 class _MoreItemsScreenState extends State<MoreItemsScreen> {
 
-  final _searchController = Get.find<SearchController>();
+  final _searchController = Get.find<MySearchController>();
 
   @override
   Widget build(BuildContext context) {

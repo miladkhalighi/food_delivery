@@ -1,9 +1,9 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:food_delivery/controllers/my_search_controller.dart';
 import 'package:food_delivery/res/colors.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/drawer_controller.dart';
@@ -13,7 +13,6 @@ import 'package:food_delivery/res/dimentions.dart';
 import 'package:food_delivery/views/screens/cart_screen/cart_screen.dart';
 import 'package:get/get.dart';
 
-import 'controllers/search_controller.dart';
 import 'views/screens/history_screen/history_screen.dart';
 import 'views/screens/home_screen/home_screen.dart';
 import 'views/screens/liked_screen/liked_screen.dart';
@@ -74,7 +73,7 @@ class _RootNavigatorState extends State<RootNavigator> {
               onPressed: () {
                 //Get.to(()=> const CartScreen());
                 FocusScope.of(context).unfocus();
-                Get.find<SearchController>().searchBarController.clear();
+                Get.find<MySearchController>().searchBarController.clear();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const CartScreen()));
               },

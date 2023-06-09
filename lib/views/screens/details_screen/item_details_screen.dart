@@ -173,6 +173,7 @@ class ItemDetailsScreen extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  itemCtr.currentPos.value = 0;
                 },
                 icon: const Icon(
                   Icons.arrow_back,
